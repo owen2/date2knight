@@ -53,8 +53,7 @@ else
             <form name="quiz" action="capturedata.php" method="post" onsubmit="return validateForm()" >
             <table width=100%>
 		    <?php
-			    mysql_connect("mysql.owenjohnson.info", "lovematch","lovematch"); // There is a web based admin tool at mysql.owenjohnson.info. Use the user lovematch and the password lovematch to get in to edit questions and clear results.
-			    mysql_query("USE `lovematch`");
+				 require_once("connect.php");
 			    $result = mysql_query("SELECT * FROM `questions` ORDER BY rand();");
 			    mysql_error();
 			
