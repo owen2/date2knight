@@ -1,8 +1,7 @@
 <?php error_reporting(E_ALL);
 ini_set('display_errors', '1');
     
-    mysql_connect("mysql.owenjohnson.info", "lovematch","lovematch");
-    mysql_query("USE `lovematch`");
+require_once("connect.php");
 
 $update = "UPDATE `lovematch`.`responses` SET `paid` = 'paid' WHERE `responses`.`id` =" .$_REQUEST['id'];
 $r = mysql_query("SELECT * FROM `responses` WHERE `id` = ". $_REQUEST['id']);

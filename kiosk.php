@@ -9,8 +9,7 @@
         <div class="centered bodywrap">
 		    <h1>Admin Page</h1>
 		    <?php
-			    mysql_connect("mysql.owenjohnson.info", "lovematch","lovematch"); // There is a web based admin tool at mysql.owenjohnson.info. Use the user lovematch and the password lovematch to get in to edit questions and clear results.
-			    mysql_query("USE `lovematch`");
+				 require_once("connect.php");
 			    $result = mysql_query("SELECT * FROM `responses` ORDER BY `name`;");
 			    mysql_error();
 			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses`");
