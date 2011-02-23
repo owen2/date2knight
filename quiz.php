@@ -39,7 +39,7 @@ else
     
     <body>
         <script type="text/javascript">
-
+		   var phone_expr = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
 			$(document).ready(function(){
 				$("input[name=box]").blur(function() {
 				    var box_error = $(this).next();
@@ -51,7 +51,7 @@ else
 				});
 				$("input[name=phone]").blur(function() {
 				    var phone_error = $(this).next();
-				    var phone_expr = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+
 				    if ($(this).val() == null || $(this).val() == "" || !phone_expr.test($(this).val())) {
 				        phone_error.text("Phone is invalid");
 				    } else {
@@ -59,15 +59,26 @@ else
 				    }
 				});
 				
-				function canSubmit(){
-					return ($("input[name=box]").val() != "" && $("input[name=phone]").val() != "");
+				function validate(){
+					if(!$("input[name=box]").val()==""){
+						if(!$("input[name=phone]").val()==""){
+							if(phone_expr.test($("input[name=phone]").val())){
+								return true;							
+							}			
+						}
+					}
+					return false;
 				}
+				
+				$('#quiz').submit(function() {
+				   return validate();
+				});
 			});
         </script>
         <div class="bodywrap">
             <br>
             <h1>Date2Knight Survey</h1>
-            <form name="quiz" action="capturedata.php" method="post" onsubmit="return canSubmit()" >
+            <form id="quiz" action="capturedata.php" method="post" >
             <table width=100%>
 		    <?php
 				 require_once("connect.php");
@@ -97,11 +108,11 @@ else
                 </tr>
                 <tr>
                     <td>Box Number:</td>
-                    <td colspan="2"><input name="box" placeholder="1337" required="required"/><span class="error"></span></td>
+                    <td style="width:300px"><input name="box" placeholder="1337" required="required"/><span class="error"></span></td>
                 </tr>
                 <tr>
                     <td>Phone Number:</td>
-                    <td><input name="phone" placeholder="(555)876-5309" required="required"/><span class="error"></span></td>
+                    <td style="width:300px"><input name="phone" placeholder="(555)876-5309" required="required"/><span class="error"></span></td>
                     
                 </tr>
                 <tr>
