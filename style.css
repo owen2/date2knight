@@ -111,3 +111,8 @@ body
 	display:none; 		
 }
 
+/* error fields */
+.error {
+	color:red;
+}
+
