@@ -25,7 +25,7 @@ if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
 			    echo("Of ". $count['total'] . " people who took the survey, ");
 			    $count_result= mysql_query("SELECT COUNT(*) AS `total_paid` FROM `responses` WHERE `paid` = 'paid'");
 			    $count = mysql_fetch_array($count_result);
-			    echo($count['total_paid'] . " of them paid for results. <a href='stats.php'>[stats]</a><br><br>");
+			    echo($count['total_paid'] . " of them paid for results. <a href='stats.php'>[stats]</a><a href='report-all.php'>[get all reports]</a><br><br>");
 			    ?><table style="margin: auto; text-align:left;"><?php
                 while ($row = mysql_fetch_array($result))
                 {
