@@ -11,6 +11,9 @@ if (!$ds)
     exit(1);
 }
 $r=ldap_bind($ds, $_POST['email'], $_POST['password']); // Use provided email and password for first bind. Password not stored. ldap_bind will hash the password before sending.
+//Test stuff
+$r=True;
+////////////
 if ($r)
 {
     $sr=ldap_search($ds, "ou=user_accounts,dc=wartburg,dc=edu","mail=". $_POST['email']);  
@@ -32,25 +35,35 @@ else
     <head>
         <link rel="stylesheet" href="style.css"/>
         <script src="http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js"></script>
-        <script type="text/javascript">
-        function validateForm()
-        {
-        //var x=document.forms["quiz"]["phone"].value
-        var y=document.forms["quiz"]["box"].value
-        if (y == null || y == "")
-          {
-          alert("You missed a spot.");
-          return false;
-          }
-        }
-        </script>
     </head>
     
     <body>
+        <script type="text/javascript">
+
+			$(document).ready(function(){
+				$("input[name=box]").blur(function() {
+				    var box_error = $(this).next();
+				    if ($(this).val() == null || $(this).val() == "") {
+				        box_error.text("Email is invalid");
+				    } else {
+				        box_error.text("");
+				    }
+				});
+				$("input[name=phone]").blur(function() {
+				    var phone_error = $(this).next();
+				    var phone_expr = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+				    if ($(this).val() == null || $(this).val() == "" || !phone_expr.test($(this).val())) {
+				        phone_error.text("Phone is invalid");
+				    } else {
+				        phone_error.text("");
+				    }
+				});
+			});
+        </script>
         <div class="bodywrap">
             <br>
             <h1>Date2Knight Survey</h1>
-            <form name="quiz" action="capturedata.php" method="post" onsubmit="return validateForm()" >
+            <form name="quiz" action="capturedata.php" method="post" onsubmit="return canSubmit()" >
             <table width=100%>
 		    <?php
 				 require_once("connect.php");
@@ -76,15 +89,16 @@ else
                 </tr>
                 <tr>
                     <td>Email Address:</td>
-                    <td> <?php echo($email);?><input type="hidden" name="email" value="<?php echo($email); ?>"/></td>
+                    <td> <?php echo($email);?><input type="hidden" name="email" value="<?php echo($email); ?>"/></td>                
                 </tr>
                 <tr>
                     <td>Box Number:</td>
-                    <td><input name="box" placeholder="1337" required="required"/></td>
+                    <td colspan="2"><input name="box" placeholder="1337" required="required"/><span class="error"></span></td>
                 </tr>
                 <tr>
                     <td>Phone Number:</td>
-                    <td><input name="phone" placeholder="(555)876-5309" required="required"/></td>
+                    <td><input name="phone" placeholder="(555)876-5309" required="required"/><span class="error"></span></td>
+                    
                 </tr>
                 <tr>
                     <td>Are you female or male?</td>

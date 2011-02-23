@@ -161,8 +161,7 @@
 
 <body>
     <?php
-        mysql_connect("mysql.owenjohnson.info", "lovematch","lovematch"); // There is a web based admin tool at mysql.owenjohnson.info. Use the user lovematch and the password lovematch to get in to edit questions and clear results.
-	    mysql_query("USE `lovematch`");
+       require_once("connect.php");
 	    $result = mysql_query("SELECT * FROM `responses` WHERE `paid` = 'paid' ORDER BY `box`;");
 	    while($person = mysql_fetch_array($result))
 	    {
