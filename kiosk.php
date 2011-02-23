@@ -1,3 +1,11 @@
+<?php
+session_start();
+require_once("auth.php");
+if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
+{
+    header("location: login.php");
+}
+?>
 <!doctype html>
 <html>
     <head>
