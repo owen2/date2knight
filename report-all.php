@@ -26,7 +26,7 @@
     {
         if ($personA['paid'] != "paid")
         {
-            echo("Results are availible from the computer club for $2. Please mail an envelope with your name and $2 to Computer Club Box 707 or purchase results at our table in the student center. Also, why are you trying to steal your results? It isn't nice.");
+            echo($personA['name'] . "hasn't paid for results. Results are availible from the Computer Club for $2. Bring your $2 to any Computer Club member or look for our table in the student center. ");
             return false; 
         }
         $matchlist = array();
