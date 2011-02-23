@@ -58,6 +58,10 @@ else
 				        phone_error.text("");
 				    }
 				});
+				
+				function canSubmit(){
+					return ($("input[name=box]").val() != "" && $("input[name=phone]").val() != "");
+				}
 			});
         </script>
         <div class="bodywrap">
