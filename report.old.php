@@ -1,8 +1,7 @@
 <?php error_reporting(E_ALL);
     ini_set('display_errors', '1');
 
-    mysql_connect("mysql.owenjohnson.info", "lovematch","lovematch");
-    mysql_query("USE `lovematch`");
+	 require_once("scripts/connect.php");
     
     $result = mysql_query("SELECT * FROM `responses` WHERE id=" . $_REQUEST['id']);
     $personA = mysql_fetch_array($result);
@@ -95,8 +94,8 @@
 ?>
 <!doctype html>
 <head>
-    <link rel="stylesheet" href="style.css" media="screen" />
-    <link rel="stylesheet" href="print.css" media="print" />
+    <link rel="stylesheet" href="css/style.css" media="screen" />
+    <link rel="stylesheet" href="css/print.css" media="print" />
 </head>
 
 <body>

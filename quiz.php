@@ -42,7 +42,7 @@ else
         <div class="bodywrap">
             <br>
             <h1>Date2Knight Survey</h1>
-            <form id="quiz" action="capturedata.php" method="post" >
+            <form id="quiz" action="scripts/capturedata.php" method="post" >
             <table width=100%>
 		    <?php
 				 require_once("scripts/connect.php");

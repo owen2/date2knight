@@ -1,5 +1,5 @@
 var phone_expr = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
-
+$(document).ready(function(){
 	$("input[name=box]").blur(function() {
 	    var box_error = $(this).next();
 	    if ($(this).val() == null || $(this).val() == "") {
@@ -32,3 +32,4 @@ var phone_expr = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
 	$('#quiz').submit(function() {
 	   return validate();
 	});
+});

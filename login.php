@@ -1,8 +1,8 @@
 <!doctype html>
 <html>
     <head>
-        <link rel="stylesheet" href="style.css" media="screen" />
-        <link rel="stylesheet" href="print.css" media="print" />
+        <link rel="stylesheet" href="css/style.css" media="screen" />
+        <link rel="stylesheet" href="css/print.css" media="print" />
     </head>
     <body>
 

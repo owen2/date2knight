@@ -1,7 +1,7 @@
 <?php error_reporting(E_ALL);
     ini_set('display_errors', '1');
 
-	 require_once("connect.php");
+	 require_once("scripts/connect.php");
     
     $result = mysql_query("SELECT * FROM `responses` WHERE id=" . $_REQUEST['id']);
     $personA = mysql_fetch_array($result);
@@ -148,7 +148,7 @@
 ?>
 <!doctype html>
 <head>
-    <link rel="stylesheet" href="print.css" />
+    <link rel="stylesheet" href="css/print.css" />
 </head>
 
 <body>

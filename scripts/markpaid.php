@@ -1,7 +1,14 @@
 <?php error_reporting(E_ALL);
 ini_set('display_errors', '1');
-    
-require_once("connect.php");
+
+require_once("scripts/auth.php");
+
+if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
+{
+    header("location: login.php");
+}
+
+require_once("scripts/connect.php");
 
 $update = "UPDATE `lovematch`.`responses` SET `paid` = 'paid' WHERE `responses`.`id` =" .$_REQUEST['id'];
 $r = mysql_query("SELECT * FROM `responses` WHERE `id` = ". $_REQUEST['id']);
