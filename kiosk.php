@@ -17,7 +17,7 @@ if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
         <div class="centered bodywrap">
 		    <h1>Admin Page</h1>
 		    <?php
-				require_once("connect.php");
+				 mysql_query("USE `lovematch`");
 			    $result = mysql_query("SELECT * FROM `responses` ORDER BY `name`;");
 			    mysql_error();
 			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses`");

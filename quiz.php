@@ -33,55 +33,19 @@ else
 <!doctype html>
 <html>
     <head>
-        <link rel="stylesheet" href="style.css"/>
-        <script src="http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js"></script>
+        <link rel="stylesheet" href="css/style.css"/>
+        <script src="http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js"></script>   
     </head>
     
     <body>
-        <script type="text/javascript">
-		   var phone_expr = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
-			$(document).ready(function(){
-				$("input[name=box]").blur(function() {
-				    var box_error = $(this).next();
-				    if ($(this).val() == null || $(this).val() == "") {
-				        box_error.text("Email is invalid");
-				    } else {
-				        box_error.text("");
-				    }
-				});
-				$("input[name=phone]").blur(function() {
-				    var phone_error = $(this).next();
-
-				    if ($(this).val() == null || $(this).val() == "" || !phone_expr.test($(this).val())) {
-				        phone_error.text("Phone is invalid");
-				    } else {
-				        phone_error.text("");
-				    }
-				});
-				
-				function validate(){
-					if(!$("input[name=box]").val()==""){
-						if(!$("input[name=phone]").val()==""){
-							if(phone_expr.test($("input[name=phone]").val())){
-								return true;							
-							}			
-						}
-					}
-					return false;
-				}
-				
-				$('#quiz').submit(function() {
-				   return validate();
-				});
-			});
-        </script>
+        <script type="text/javascript" src="js/quiz.js"></script> 
         <div class="bodywrap">
             <br>
             <h1>Date2Knight Survey</h1>
             <form id="quiz" action="capturedata.php" method="post" >
             <table width=100%>
 		    <?php
-				 require_once("connect.php");
+				 require_once("scripts/connect.php");
 			    $result = mysql_query("SELECT * FROM `questions` ORDER BY rand();");
 			    mysql_error();
 			

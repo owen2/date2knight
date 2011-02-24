@@ -4,19 +4,8 @@ ini_set('display_errors', '1');
 <!doctype html>
 <html>
     <head>
-        <link rel="stylesheet" href="style.css"/>
-        <script type="text/javascript">
-        function validateForm()
-        {
-        var x=document.forms["login"]["email"].value
-        var y=document.forms["login"]["password"].value
-        if (x==null || x=="" || y == null || y == "")
-          {
-          alert("You missed a spot.");
-          return false;
-          }
-        }
-        </script>
+        <link rel="stylesheet" href="css/style.css"/>
+        <script type="text/javascript" src="js/index.js"></script>
     </head>
     
     <body>
