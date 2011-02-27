@@ -1,18 +1,18 @@
 <?php error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-$name = "Test User"; 
+$name = "Test User";
 $email = "spam@colorfullimo.com";
 
 $ds=ldap_connect("dmc1.wartburg.edu");
 if (!$ds)
 {
     ?><h1>Could not connect to LDAP!!!</h1><?php
-    exit(1);
+    //exit(1);
 }
 $r=ldap_bind($ds, $_POST['email'], $_POST['password']); // Use provided email and password for first bind. Password not stored. ldap_bind will hash the password before sending.
 //Test stuff
-$r=True;
+//$r=True;
 ////////////
 if ($r)
 {
@@ -25,9 +25,9 @@ if ($r)
 }
 else
 {
-    ?><h1>Sorry, we couldn't verify your username and password.</h1><a href="index.php">Try Again</a>
+    ?><h1>Sorry, we couldn't verify your username and password. The results of this survey will NOT be saved.</h1><a href="index.php">Try Again</a>
 <?php
-    exit(1);
+    //exit(1);
 }
 ?>
 <!doctype html>
@@ -36,7 +36,6 @@ else
         <link rel="stylesheet" href="css/style.css"/>
         <script src="http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js"></script>   
     </head>
-    
     <body>
         <script type="text/javascript" src="js/quiz.js"></script> 
         <div class="bodywrap">
@@ -56,7 +55,7 @@ else
                     <tr><td class="centered"><?php echo($row['lefttext']);?></td><td><input id="<?php echo($row['id']); ?>" name="<?php echo($row['id']); ?>" type="range" class="slider" min="0" max="10" value="5"/></td><td class="centered"><?php echo($row['righttext']);?></td></tr>
                     <tr><td colspan="3"><hr></td></tr>
                     <?php
-                }					
+                }
 		    ?>
 		    </table>
 		    <table class="padded content">
@@ -77,7 +76,6 @@ else
                 <tr>
                     <td>Phone Number:</td>
                     <td style="width:300px"><input name="phone" placeholder="(555)876-5309" required="required"/><span class="error"></span></td>
-                    
                 </tr>
                 <tr>
                     <td>Are you female or male?</td>
