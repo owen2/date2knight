@@ -1,13 +1,9 @@
-<?php error_reporting(E_ALL);
-ini_set('display_errors', '1');
-?>
 <!doctype html>
 <html>
     <head>
         <link rel="stylesheet" href="css/style.css"/>
         <script type="text/javascript" src="js/index.js"></script>
     </head>
-    
     <body>
         <div class="padded bodywrap">
             <h1>Welcome to Date2Knight!</h1>
@@ -24,6 +20,7 @@ ini_set('display_errors', '1');
                         <input name="password" type="password" placeholder="password" />
                         <input type="submit" value="Login"/>
                     </form>
-                    <!--Developers can bypass this page, use <a href="quiz.php">link</a>.-->
             </div>
         </div>
+    </body>
+</html>

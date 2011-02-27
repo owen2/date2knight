@@ -1,0 +1,18 @@
+# Date 2 Knight Verson 2011
+
+Looks like you've already installed the package. Now go make sure that you have the right stuff in the scripts/connect.php
+
+Now you should probably take the quiz for yourself to make sure everything is working.
+
+Then checkout the admin page at kiosk.php. Someone should know the super secret password, it's the old name of the club.
+
+If you can see your own results in there, everything is in order. 
+
+You might want to change the email message's names in the markpaid.php.
+
+Original Version by: Owen Johnson in 2011
+Contributors:
+Owen Johnson
+Matt Phillips
+
+(add your name if you contributed)

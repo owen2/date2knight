@@ -60,7 +60,5 @@
 			    echo($count['total'] ." keep a messy room.<br>");
         ?>
         </div>
-
     </body>
-
 </html>

@@ -1,21 +1,17 @@
-<?php 
+<?php
     error_reporting(E_ALL);
     ini_set('display_errors', '1');
-    
+
     session_start();
-<<<<<<< HEAD
-    require_once("auth.php");
-    if (!checkSimplePasskey("missingbytes", ""))
-=======
+
     require_once("scripts/auth.php");
     if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
->>>>>>> 2e9c0870ac57ba3acd34927e58821f3d11e0e89e
     {
         header("location: login.php");
     }
-	
-	require_once("scripts/connect.php");
-    
+    require_once("scripts/connect.php");
+
+
     //////////////////////
     function canDoIt($a, $b)
     {/////////////////////////////
@@ -26,13 +22,13 @@
     }/////////////////////////////
     //////////////////////////////
     ////////////////////////////
-    
+
     function getTopDates($personA, $limit=10)
     {
         if ($personA['paid'] != "paid")
         {
             echo($personA['name'] . "hasn't paid for results. Results are availible from the Computer Club for $2. Bring your $2 to any Computer Club member or look for our table in the student center. ");
-            return false; 
+            return false;
         }
         $matchlist = array();
         $friendlist = array();
@@ -48,8 +44,7 @@
         asort($matchlist);
         asort($friendlist);
         ?>
-        
-        
+
         <table width = 100%>
         <tr>
             <th>Love Matches</th>
@@ -86,7 +81,6 @@
             ?><tr><td><?php printName($id); ?></td><td><?php printPhone($id); ?></td><td>Mailbox <?php printBox($id); ?></td><td><?php printHearts($matchscore, "&#9775;");?></td></tr><?php
         }?>
         </table>
-        
         <?php
     }
 

@@ -5,14 +5,12 @@
         <link rel="stylesheet" href="css/print.css" media="print" />
     </head>
     <body>
-
         <div class="centered padded bodywrap">
-		    <h1>What's the supersecret password?</h1>
-		    <form action="kiosk.php" method="post">
-		        <input name="pass" type="password" required="required" />
-		        <input type="submit" value="login!"/>
-		    </form>
-	    </div>
-	    
+	    <h1>What's the supersecret password?</h1>
+	    <form action="kiosk.php" method="post">
+		<input name="pass" type="password" required="required" />
+		<input type="submit" value="login!"/>
+	    </form>
+	</div>
     </body>
 </html>
