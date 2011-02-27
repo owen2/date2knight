@@ -1,15 +1,15 @@
 <!doctype html>
 <html>
     <head>
-        <link rel="stylesheet" href="style.css" media="screen" />
-        <link rel="stylesheet" href="print.css" media="print" />
+        <link rel="stylesheet" href="css/style.css" media="screen" />
+        <link rel="stylesheet" href="css/print.css" media="print" />
     </head>
     <body>
 
         <div class="centered bodywrap">
 		    <h1>Date 2 Knight Stats Page</h1>
 		    <?php
-				 require_once("connect.php");
+				 require_once("scripts/connect.php");
 			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses`");
 			    $count = mysql_fetch_array($count_result);
 			    echo("Of ". $count['total'] . " people who took the survey...<br><br>");

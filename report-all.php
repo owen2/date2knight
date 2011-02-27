@@ -3,13 +3,18 @@
     ini_set('display_errors', '1');
     
     session_start();
+<<<<<<< HEAD
     require_once("auth.php");
     if (!checkSimplePasskey("missingbytes", ""))
+=======
+    require_once("scripts/auth.php");
+    if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
+>>>>>>> 2e9c0870ac57ba3acd34927e58821f3d11e0e89e
     {
         header("location: login.php");
     }
 	
-	require_once("connect.php");
+	require_once("scripts/connect.php");
     
     //////////////////////
     function canDoIt($a, $b)
@@ -164,12 +169,12 @@
 ?>
 <!doctype html>
 <head>
-    <link rel="stylesheet" href="print.css" />
+    <link rel="stylesheet" href="css/print.css" />
 </head>
 
 <body>
     <?php
-       require_once("connect.php");
+       require_once("scripts/connect.php");
 	    $result = mysql_query("SELECT * FROM `responses` WHERE `paid` = 'paid' ORDER BY `box`;");
 	    while($person = mysql_fetch_array($result))
 	    {

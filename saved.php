@@ -4,7 +4,7 @@ ini_set('display_errors', '1');
 <!doctype html>
 <html>
     <head>
-        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="css/style.css"/>
     </head>
     <body>
         <div class="padded bodywrap">
