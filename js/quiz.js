@@ -1,9 +1,5 @@
 var phone_expr = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
-<<<<<<< HEAD
-
-=======
 $(document).ready(function(){
->>>>>>> 2e9c0870ac57ba3acd34927e58821f3d11e0e89e
 	$("input[name=box]").blur(function() {
 	    var box_error = $(this).next();
 	    if ($(this).val() == null || $(this).val() == "") {
@@ -35,9 +31,5 @@ $(document).ready(function(){
 	
 	$('#quiz').submit(function() {
 	   return validate();
-<<<<<<< HEAD
-	});
-=======
 	});
 });
->>>>>>> 2e9c0870ac57ba3acd34927e58821f3d11e0e89e
