@@ -41,5 +41,6 @@ if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
                 }
 	     ?></ul>
         </div>
+        <a href="cleardb.php?really=yes" style="font-size: xx-small">clear database? only click if you really mean it.</a>
     </body>
 </html>
