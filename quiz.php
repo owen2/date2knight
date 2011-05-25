@@ -8,7 +8,7 @@ $ds=ldap_connect("dmc1.wartburg.edu");
 if (!$ds)
 {
     ?><h1>Could not connect to LDAP!!!</h1><?php
-    //exit(1);
+    exit(1);
 }
 $r=ldap_bind($ds, $_POST['email'], $_POST['password']); // Use provided email and password for first bind. Password not stored. ldap_bind will hash the password before sending.
 //Test stuff
@@ -27,7 +27,7 @@ else
 {
     ?><h1>Sorry, we couldn't verify your username and password. The results of this survey will NOT be saved.</h1><a href="index.php">Try Again</a>
 <?php
-    //exit(1);
+    exit(1);
 }
 ?>
 <!doctype html>
@@ -41,10 +41,10 @@ else
         <div class="bodywrap">
             <br>
             <h1>Date2Knight Survey</h1>
-            <form id="quiz" action="scripts/capturedata.php" method="post" >
+            <form id="quiz" action="capturedata.php" method="post" >
             <table width=100%>
 		    <?php
-				 require_once("scripts/connect.php");
+				 require_once("connect.php");
 			    $result = mysql_query("SELECT * FROM `questions` ORDER BY rand();");
 			    mysql_error();
 			
@@ -60,7 +60,7 @@ else
 		    </table>
 		    <table class="padded content">
                 <tr>
-                    <td colspan=2> <h2>Contact Info: (Will be shown on results)</h2></td>
+                    <th colspan=2>Contact Info</th>
                 </tr>
                 <tr>
                     <td> Full Name:</td><td><?php echo($name);?><input type="hidden" name="name" value="<?php echo($name); ?>"/></td>
@@ -70,20 +70,30 @@ else
                     <td> <?php echo($email);?><input type="hidden" name="email" value="<?php echo($email); ?>"/></td>                
                 </tr>
                 <tr>
-                    <td>Box Number:</td>
+                    <td>Send my results to box:</td>
                     <td style="width:300px"><input name="box" placeholder="1337" required="required"/><span class="error"></span></td>
                 </tr>
                 <tr>
-                    <td>Phone Number:</td>
+                    <td>Public phone number:</td>
                     <td style="width:300px"><input name="phone" placeholder="(555)876-5309" required="required"/><span class="error"></span></td>
+                </tr>
+                
+                <tr>
+                    <th colspan="2">Sexual Orientation</th>
                 </tr>
                 <tr>
                     <td>Are you female or male?</td>
                     <td><input type="radio" name="gender" value="f"/>Female<input type="radio" name="gender" value="m"/>Male</td>
                 </tr>
                 <tr>
-                    <td>Interested in men?</td><td><input type="checkbox" name="seeksmale"/>I like men.</td></tr>
-                    <tr><td>Interested in women?</td><td><input type="checkbox" name="seeksfemale" />I like women.</td></tr>
+                    <td>Interested in men?</td><td><input type="checkbox" name="seeksmale"/>Match me with men. </td>
+                </tr>
+                <tr>
+                    <td>Interested in women?</td><td><input type="checkbox" name="seeksfemale" />Match me with women.</td>
+                </tr>
+                <tr>
+                    <td>Not looking for dates?</td><td><input type="checkbox" name="seeksfemale" />Exclude me from love matches, I only want friend matches.</td>
+                </tr>
 		    </table>
 		    <input class="hugebutton" type="submit" value="Next &raquo;"></input>
 		    </form>
