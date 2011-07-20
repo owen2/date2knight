@@ -28,7 +28,11 @@ if ($stmt->prepare("INSERT INTO `queue` (`username`,`token`) VALUES (?,?)"))
 }
 $db->close();
 $mail = new PHPMailer();
-$body = 'http://localhost/date2knight/quiz.php?token=' . $token;
+$link = 'http://localhost/date2knight/quiz.php?token=' . $token;
+$body = "Hi $first $last!\r\n";
+$body .= "The " . Date('Y') . " edition of Wartburg's is ready and waiting for you as requested.\r\n";
+$body .= "Click on the following link to get started. \r\n" . $link . "\r\n\r\nThank you!\r\nWartburg Computer Club\r\n";
+
 $mail->IsSMTP();
 //$mail->SMTPDebug  = 2;
 $mail->SMTPAuth = true;
@@ -39,10 +43,7 @@ $mail->Username = "date2knight@gmail.com";
 $mail->Password = "datepass";
 $mail->SetFrom("date2knight@gmail.com","Match Maker");
 $mail->Subject = "Pending Quiz";
-$mail->AltBody = $body;
-$mail->WordWrap = 50;
-//$body = '<a href="' . $body . '">Quiz</a>'; //barricuda flags as spam
-$mail->MsgHTML($body);
+$mail->Body = $body;
 $mail->AddAddress($to,$toName);
 
 if(!$mail->Send()) {
