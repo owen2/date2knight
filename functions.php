@@ -1,7 +1,7 @@
 <?php
 function db_connect()
 {
-    $host = 'localhost';
+    $host = 'mysql.owenjohnson.info';
     $user = 'lovematch';
     $password = 'lovematch';
     $db = 'lovematch';

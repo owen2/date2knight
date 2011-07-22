@@ -21,7 +21,7 @@
                 <h2>Let's get started!</h2>
                     <p>Enter your wartburg email address:</p>
                     <form id="form" name="login">
-                        <input name="email" id="email" class="validate[required]" type="email" placeholder="@wartburg.edu" />@wartburg.edu
+                        <input name="email" id="email" class="validate[required]" type="email" placeholder="your.name" />@wartburg.edu
                             
                         <input type="submit" id="submit" value="Continue"/>
                     </form>
