@@ -1,1 +1,1 @@
-<?php mysql_connect("mysql.owenjohnson.info", "lovematch","lovematch");mysql_query("USE `lovematch`");?>
+<?php require_once("dbauth.php"); mysql_connect(DbAuth::$host, DbAuth::$user,DbAuth::$password);mysql_query("USE DbAuth::$db");?>
