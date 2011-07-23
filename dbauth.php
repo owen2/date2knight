@@ -6,3 +6,4 @@ class DbAuth
     public static $password = 'lovematch';
     public static $db = 'lovematch';
 }
+?>
