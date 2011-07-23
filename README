@@ -1,6 +1,6 @@
 # Date 2 Knight Verson 2011
 
-Looks like you've already installed the package. Now go make sure that you have the right stuff in the scripts/connect.php
+Looks like you've already installed the package. Now go make sure that you have the right stuff in the scripts/dbauth.php
 
 Now you should probably take the quiz for yourself to make sure everything is working.
 
