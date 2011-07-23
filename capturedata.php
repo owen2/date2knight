@@ -2,18 +2,16 @@
 ini_set('display_errors', '1');
 include('functions.php');    
 
-if (isset($_REQUEST['seeksmale']))
-{
-    if ($_REQUEST['seeksmale'] == 'on')
-	$_REQUEST['seeksmale'] = 1;
-    else $_REQUEST['seeksmale'] = 0;
-}
-if (isset($_REQUEST['seeksfemale']))
-{
-    if ($_REQUEST['seeksfemale'] == 'on')
-	$_REQUEST['seeksfemale'] = 1;
-    else $_REQUEST['seeksfemale'] = 0;
-}
+
+if (isset($_REQUEST['seeksmale']) && $_REQUEST['seeksmale'] == 'on')
+    $_REQUEST['seeksmale'] = 1;
+else
+    $_REQUEST['seeksmale'] = 0;
+
+if (isset($_REQUEST['seeksfemale']) && $_REQUEST['seeksfemale'] == 'on')
+    $_REQUEST['seeksfemale'] = 1;
+else
+    $_REQUEST['seeksfemale'] = 0;
 
 $db = db_connect();
 $stmt = $db->stmt_init();
