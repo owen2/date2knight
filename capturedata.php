@@ -14,6 +14,7 @@ if (isset($_REQUEST['seeksfemale']))
 	$_REQUEST['seeksfemale'] = 1;
     else $_REQUEST['seeksfemale'] = 0;
 }
+
 $db = db_connect();
 $stmt = $db->stmt_init();
 if ($stmt->prepare("DELETE FROM `queue` WHERE `token`=?"))

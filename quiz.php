@@ -53,7 +53,7 @@ if ($stmt->prepare("SELECT `username` FROM `queue` WHERE `token`=?"))
 	while($stmt->fetch())
 	{
 	    ?>
-	               <tr><td colspan="3" class="question"><?php echo($text);?></td></tr><?/*?>
+	               <tr><td colspan="3" class="question"><?php echo($text);?></td></tr><?php ?>
 		<tr><td class="centered"><?php echo($lefttext);?></td><td><input id="<?php echo($id);?>" name="<?php echo($id);?>" type="range" class="slider" min="0" max="10" value="5"/></td><td class="centered"><?php echo($righttext);?></td></tr>
                     <tr><td colspan="3"><hr></td></tr>
 											    
