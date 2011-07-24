@@ -168,7 +168,7 @@
 
 <body>
     <?php
-       require_once("scripts/connect.php");
+       require_once("connect.php");
 	    $result = mysql_query("SELECT * FROM `responses` WHERE `paid` = 'paid' ORDER BY `box`;");
 	    while($person = mysql_fetch_array($result))
 	    {
