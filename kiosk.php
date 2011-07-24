@@ -34,7 +34,7 @@ if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
                     echo("<tr>");
                     echo("<td>". $row['name'] ."</td>");
                     echo("<td>");
-                    if ($row['paid'] == "paid"){echo('<a href="report.php?id='. $row['id'] .'">get report</a></td><td>');}else{echo('</td><td><a href="scripts/markpaid.php?id='. $row['id'] .'">mark as paid</a>');}
+                    if ($row['paid'] == "paid"){echo('<a href="report.php?id='. $row['id'] .'">get report</a></td><td>');}else{echo('</td><td><a href="markpaid.php?id='. $row['id'] .'">mark as paid</a>');}
                     echo("</td>");
                     echo("</tr>");
                 }
