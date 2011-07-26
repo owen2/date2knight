@@ -43,13 +43,13 @@ $data["page"] = $page;
 $data["total"] = $total;
 $data["rows"] = array();
 
-$sql = "SELECT name,id FROM `responses` $searchSql $sortSql $limitSql";
+$sql = "SELECT paid,box,name,id FROM `responses` $searchSql $sortSql $limitSql";
 $result = mysql_query($sql);
 
 while($row = mysql_fetch_assoc($result))
 {
     $data["rows"][] = array("id" => $row['id'],
-			    "cell" => array($row['name']));
+			    "cell" => array($row['name'],$row['box'],$row['paid']));
     echo json_encode($data);
 
 }

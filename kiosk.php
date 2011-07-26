@@ -18,6 +18,12 @@ if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
       <link type="text/css" href="css/ui-darkness/jquery-ui-1.8.13.custom.css" rel="stylesheet" />
       <link rel="stylesheet" media="screen" href="flexstyle/flexigrid.pack.css" type="text/css" />      
       <style>
+.flexigrid div.fbutton .add {
+    background: url("flexstyle/images/add.png") no-repeat scroll left center transparent;
+}
+.flexigrid div.fbutton .delete {
+    background: url("flexstyle/images/delete.png") no-repeat scroll left center transparent;
+}
 	div.ui-dialog{
  font-size:10px;
 }
