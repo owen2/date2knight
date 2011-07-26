@@ -34,7 +34,8 @@ $searchSql = ($qtype != '' && $query != '') ? "where $qtype = '$query'" : '';
 $sql = "SELECT COUNT(*) from responses $searchSql";
 
 $result = mysql_query($sql);
-$total = mysql_num_rows($result);
+$row = mysql_fetch_array($result);
+$total = $row[0];
 
 $pageStart = ($page-1)*$rp;
 $limitSql = "limit $pageStart, $rp";
