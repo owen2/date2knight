@@ -8,7 +8,8 @@ $(document).ready(function(){
 	url: "kioskdata.php",
 	dataType: "json",
 	colModel: [
-		   {display: "Name", name: "name",width: 80,sortable: true,align: "left"},
+		   {display: "First Name", name: "firstname",width: 80,sortable: true,align: "left"},
+		   {display: "Last Name",name: "lastname", width: 80,sortable: true,align: "left"},
 		   {display: "Box",name: "box", width:60,sortable: true,align:"left"},
 		   {display: "Paid",name: "box",width:60,sortable: true,align: "left"}
 	],
@@ -17,9 +18,10 @@ $(document).ready(function(){
 			  {name: "Unmark Paid",bclass: "delete",onpress: doCommand}
 			  ],
 	searchitems: [
-	    {display: "Name",name: "name"}
+		      {display: "First Name",name: "firstname"},
+		      {display: "Last Name",name: "lastname"}
 	],
-	sortname: "name",
+	sortname: "lastname",
 	sortorder: "asc",
 	usepager: true,
 	useRp: true,

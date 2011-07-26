@@ -13,6 +13,9 @@ if (isset($_REQUEST['seeksfemale']) && $_REQUEST['seeksfemale'] == 'on')
 else
     $_REQUEST['seeksfemale'] = 0;
 
+$nameFrags = explode(" ",$_REQUEST['name']);
+$firstname = $nameFrags[0];
+$lastname = $nameFrags[1];
 $db = db_connect();
 $stmt = $db->stmt_init();
 if ($stmt->prepare("DELETE FROM `queue` WHERE `token`=?"))
@@ -35,10 +38,10 @@ if ($stmt->prepare("SELECT `id` FROM `responses` WHERE `email`=?"))
 }
 if ($id == 'flag')
 {
-    if ($stmt->prepare("INSERT INTO `responses` (`name`,`box`,`phone`,`email`,`gender`,`seeksmale`,`seeksfemale`,`paid`,`1`,`2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
+    if ($stmt->prepare("INSERT INTO `responses` (`firstname`,`lastname`,`box`,`phone`,`email`,`gender`,`seeksmale`,`seeksfemale`,`paid`,`1`,`2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
     {
 	$paid = "s";
-	$stmt->bind_param('sissssssiiiiiiiiiiiiiiiiiiiiiiiii',$_REQUEST['name'],$_REQUEST['box'],$_REQUEST['phone'],$_REQUEST['email'],$_REQUEST['gender'],$_REQUEST['seeksmale'],$_REQUEST['seeksfemale'],$paid,$_REQUEST['1'],$_REQUEST['2'],$_REQUEST['3'],$_REQUEST['4'],$_REQUEST['5'],$_REQUEST['6'],$_REQUEST['7'],$_REQUEST['8'],$_REQUEST['9'],$_REQUEST['10'],$_REQUEST['11'],$_REQUEST['12'],$_REQUEST['13'],$_REQUEST['14'],$_REQUEST['15'],$_REQUEST['16'],$_REQUEST['17'],$_REQUEST['18'],$_REQUEST['19'],$_REQUEST['20'],$_REQUEST['21'],$_REQUEST['22'],$_REQUEST['23'],$_REQUEST['24'],$_REQUEST['25']);
+	$stmt->bind_param('ssissssssiiiiiiiiiiiiiiiiiiiiiiiii',$firstname,$lastname,$_REQUEST['box'],$_REQUEST['phone'],$_REQUEST['email'],$_REQUEST['gender'],$_REQUEST['seeksmale'],$_REQUEST['seeksfemale'],$paid,$_REQUEST['1'],$_REQUEST['2'],$_REQUEST['3'],$_REQUEST['4'],$_REQUEST['5'],$_REQUEST['6'],$_REQUEST['7'],$_REQUEST['8'],$_REQUEST['9'],$_REQUEST['10'],$_REQUEST['11'],$_REQUEST['12'],$_REQUEST['13'],$_REQUEST['14'],$_REQUEST['15'],$_REQUEST['16'],$_REQUEST['17'],$_REQUEST['18'],$_REQUEST['19'],$_REQUEST['20'],$_REQUEST['21'],$_REQUEST['22'],$_REQUEST['23'],$_REQUEST['24'],$_REQUEST['25']);
 	$stmt->execute();
 	if ($stmt->insert_id >= 0)
 	{
@@ -54,9 +57,9 @@ if ($id == 'flag')
     }
 }else
 {
-    if ($stmt->prepare("UPDATE `responses` SET `name`=?,`box`=?,`phone`=?,`gender`=?,`seeksmale`=?,`seeksfemale`=?,`paid`=?,`1`=?,`2`=?,`3`=?,`4`=?,`5`=?,`6`=?,`7`=?,`8`=?,`9`=?,`10`=?,`11`=?,`12`=?,`13`=?,`14`=?,`15`=?,`16`=?,`17`=?,`18`=?,`19`=?,`20`=?,`21`=?,`22`=?,`23`=?,`24`=?,`25`=? WHERE `id`=?"))
+    if ($stmt->prepare("UPDATE `responses` SET `firstname`=?,`lastname`=?,`box`=?,`phone`=?,`gender`=?,`seeksmale`=?,`seeksfemale`=?,`paid`=?,`1`=?,`2`=?,`3`=?,`4`=?,`5`=?,`6`=?,`7`=?,`8`=?,`9`=?,`10`=?,`11`=?,`12`=?,`13`=?,`14`=?,`15`=?,`16`=?,`17`=?,`18`=?,`19`=?,`20`=?,`21`=?,`22`=?,`23`=?,`24`=?,`25`=? WHERE `id`=?"))
     {
-	$stmt->bind_param('sisssssiiiiiiiiiiiiiiiiiiiiiiiiii',$_REQUEST['name'],$_REQUEST['box'],$_REQUEST['phone'],$_REQUEST['gender'],$_REQUEST['seeksmale'],$_REQUEST['seeksfemale'],$paid,$_REQUEST['1'],$_REQUEST['2'],$_REQUEST['3'],$_REQUEST['4'],$_REQUEST['5'],$_REQUEST['6'],$_REQUEST['7'],$_REQUEST['8'],$_REQUEST['9'],$_REQUEST['10'],$_REQUEST['11'],$_REQUEST['12'],$_REQUEST['13'],$_REQUEST['14'],$_REQUEST['15'],$_REQUEST['16'],$_REQUEST['17'],$_REQUEST['18'],$_REQUEST['19'],$_REQUEST['20'],$_REQUEST['21'],$_REQUEST['22'],$_REQUEST['23'],$_REQUEST['24'],$_REQUEST['25'],$id);
+	$stmt->bind_param('ssisssssiiiiiiiiiiiiiiiiiiiiiiiiii',$firstname,$lastname,$_REQUEST['phone'],$_REQUEST['gender'],$_REQUEST['seeksmale'],$_REQUEST['seeksfemale'],$paid,$_REQUEST['1'],$_REQUEST['2'],$_REQUEST['3'],$_REQUEST['4'],$_REQUEST['5'],$_REQUEST['6'],$_REQUEST['7'],$_REQUEST['8'],$_REQUEST['9'],$_REQUEST['10'],$_REQUEST['11'],$_REQUEST['12'],$_REQUEST['13'],$_REQUEST['14'],$_REQUEST['15'],$_REQUEST['16'],$_REQUEST['17'],$_REQUEST['18'],$_REQUEST['19'],$_REQUEST['20'],$_REQUEST['21'],$_REQUEST['22'],$_REQUEST['23'],$_REQUEST['24'],$_REQUEST['25'],$id);
 	$stmt->execute();
 	$stmt->close();
 	$db->close();
