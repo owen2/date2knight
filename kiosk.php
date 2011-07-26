@@ -9,13 +9,24 @@ if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
 <!doctype html>
 <html>
     <head>
-        <link rel="stylesheet" href="css/style.css" media="screen" />
-        <link rel="stylesheet" href="css/print.css" media="print" />
+      <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
+      <script type="text/javascript" src="js/jquery-ui-1.8.13.custom.min.js"></script>
+      <script type="text/javascript" src="js/flexigrid.pack.js"></script>
+      <link rel="stylesheet" href="css/style.css" media="screen" />
+      <link rel="stylesheet" href="css/print.css" media="print" />
+      <link type="text/css" href="css/ui-darkness/jquery-ui-1.8.13.custom.css" rel="stylesheet" />
+      <link rel="stylesheet" media="screen" href="flexstyle/flexigrid.pack.css" type="text/css" />      
+      <style>
+	div.ui-dialog{
+ font-size:10px;
+}
+	</style>
     </head>
     <body>
 
         <div class="centered bodywrap">
 		    <h1>Admin Page</h1>
+		    <div id="flex" class="flexigrid"></div>
 		    <?php
 		       require_once("connect.php");
 				 mysql_query("USE `lovematch`");
