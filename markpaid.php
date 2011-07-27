@@ -2,12 +2,6 @@
 ini_set('display_errors', '1');
 
 require_once("auth.php");
-
-if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
-{
-    header("location: ../login.php");
-}
-
 require_once("connect.php");
 
 $update = "UPDATE `lovematch`.`responses` SET `paid` = 'paid' WHERE `responses`.`id` =" .$_REQUEST['id'];

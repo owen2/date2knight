@@ -28,7 +28,7 @@ if ($stmt->prepare("INSERT INTO `queue` (`username`,`token`) VALUES (?,?)"))
 }
 $db->close();
 $mail = new PHPMailer();
-$link = 'http://' .$SERVER['SERVER_NAME'] .'/date2knight/quiz.php?token=' . $token;
+$link = Settings::$baseurl .'date2knight/quiz.php?token=' . $token;
 $body = "Hi $first $last!\r\n";
 $body .= "The " . Date('Y') . " edition of Wartburg's is ready and waiting for you as requested.\r\n";
 $body .= "Click on the following link to get started. \r\n" . $link . "\r\n\r\nThank you!\r\nWartburg Computer Club\r\n";

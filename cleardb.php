@@ -1,11 +1,6 @@
 <?php
-session_start();
-require_once("connect.php");
 require_once("auth.php");
-if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
-{
-    header("location: login.php");
-}
+require_once("connect.php");
 
 if ($_REQUEST['really'] == "yes")
 {
