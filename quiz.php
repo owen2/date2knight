@@ -46,7 +46,7 @@ if ($stmt->prepare("SELECT `username` FROM `queue` WHERE `token`=?"))
             <input type="hidden" name="token" value="<?php echo($_GET['token']);?>" />
             <table width=100%>
     <?php
-    if ($stmt->prepare("SELECT `id`,`text`,`lefttext`,`righttext` FROM `questions` ORDER BY rand();"))
+    if ($stmt->prepare("SELECT `id`,`text`,`lefttext`,`righttext` FROM `question` WHERE `enable`=1 ORDER BY rand();"))
     {
 	$stmt->execute();
 	$stmt->bind_result($id,$text,$lefttext,$righttext);
@@ -54,7 +54,7 @@ if ($stmt->prepare("SELECT `username` FROM `queue` WHERE `token`=?"))
 	{
 	    ?>
 	               <tr><td colspan="3" class="question"><?php echo($text);?></td></tr><?php ?>
-		<tr><td class="centered"><?php echo($lefttext);?></td><td><input id="<?php echo($id);?>" name="<?php echo($id);?>" type="range" class="slider" min="0" max="10" value="5"/></td><td class="centered"><?php echo($righttext);?></td></tr>
+		<tr><td class="centered"><?php echo($lefttext);?></td><td><input id="<?php echo($id);?>" name="question_<?php echo($id);?>" type="range" class="slider" min="0" max="10" value="5"/></td><td class="centered"><?php echo($righttext);?></td></tr>
                     <tr><td colspan="3"><hr></td></tr>
 											    
 		    <?php
@@ -90,16 +90,16 @@ if ($stmt->prepare("SELECT `username` FROM `queue` WHERE `token`=?"))
                 </tr>
                 <tr>
                     <td>Are you female or male?</td>
-                    <td><input type="radio" name="gender" value="f"/>Female<input type="radio" name="gender" value="m"/>Male</td>
+                    <td><input type="radio" name="gender" value="1"/>Female<input type="radio" name="gender" value="0"/>Male</td>
                 </tr>
                 <tr>
-                    <td>Interested in men?</td><td><input type="checkbox" name="seeksmale"/>Match me with men. </td>
+                    <td>Interested in men?</td><td><input class="loveseeking" type="checkbox" name="seeksmale"/>Match me with men. </td>
                 </tr>
                 <tr>
-                    <td>Interested in women?</td><td><input type="checkbox" name="seeksfemale" />Match me with women.</td>
+                    <td>Interested in women?</td><td><input type="checkbox" class="loveseeking" name="seeksfemale" />Match me with women.</td>
                 </tr>
                 <tr>
-                    <td>Not looking for dates?</td><td><input type="checkbox" name="seeksfemale" />Exclude me from love matches, I only want friend matches.</td>
+                    <td>Not looking for dates?</td><td><input id="friend" type="checkbox" name="seeksfriend" />Exclude me from love matches, I only want friend matches.</td>
                 </tr>
 		    </table>
 		    <input class="hugebutton" type="submit" value="Next &raquo;"></input>

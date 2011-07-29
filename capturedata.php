@@ -2,17 +2,17 @@
 ini_set('display_errors', '1');
 include('functions.php');    
 
-
+$paid = 0;
+$seeks = 0;
 if (isset($_REQUEST['seeksmale']) && $_REQUEST['seeksmale'] == 'on')
-    $_REQUEST['seeksmale'] = 1;
-else
-    $_REQUEST['seeksmale'] = 0;
-
+    $seeks |= 1;
 if (isset($_REQUEST['seeksfemale']) && $_REQUEST['seeksfemale'] == 'on')
-    $_REQUEST['seeksfemale'] = 1;
-else
-    $_REQUEST['seeksfemale'] = 0;
+    $seeks |= 2;
 
+if ($_REQUEST['gender'] == 'm')
+    $gender = 0;
+else
+    $gender = 1;
 $nameFrags = explode(" ",$_REQUEST['name']);
 $firstname = $nameFrags[0];
 $lastname = $nameFrags[1];
@@ -24,7 +24,7 @@ if ($stmt->prepare("DELETE FROM `queue` WHERE `token`=?"))
     $stmt->execute();
 }
 $id = 'flag';
-if ($stmt->prepare("SELECT `id` FROM `responses` WHERE `email`=?"))
+if ($stmt->prepare("SELECT `id` FROM `profile` WHERE `email`=?"))
 {
     $stmt->bind_param('s',$_REQUEST['email']);
     $stmt->execute();
@@ -36,36 +36,57 @@ if ($stmt->prepare("SELECT `id` FROM `responses` WHERE `email`=?"))
     }
     $stmt->free_result();
 }
-if ($id == 'flag')
+if ($id == 'flag') // New user profile
 {
-    if ($stmt->prepare("INSERT INTO `responses` (`firstname`,`lastname`,`box`,`phone`,`email`,`gender`,`seeksmale`,`seeksfemale`,`paid`,`1`,`2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"))
+    if ($stmt->prepare("INSERT INTO `profile` (`firstname`,`lastname`,`box`,`phone`,`email`,`gender`,`seeks`,`paid`) VALUES(?,?,?,?,?,?,?,?)"))
     {
-	$paid = 0;
-	$stmt->bind_param('ssissssssiiiiiiiiiiiiiiiiiiiiiiiii',$firstname,$lastname,$_REQUEST['box'],$_REQUEST['phone'],$_REQUEST['email'],$_REQUEST['gender'],$_REQUEST['seeksmale'],$_REQUEST['seeksfemale'],$paid,$_REQUEST['1'],$_REQUEST['2'],$_REQUEST['3'],$_REQUEST['4'],$_REQUEST['5'],$_REQUEST['6'],$_REQUEST['7'],$_REQUEST['8'],$_REQUEST['9'],$_REQUEST['10'],$_REQUEST['11'],$_REQUEST['12'],$_REQUEST['13'],$_REQUEST['14'],$_REQUEST['15'],$_REQUEST['16'],$_REQUEST['17'],$_REQUEST['18'],$_REQUEST['19'],$_REQUEST['20'],$_REQUEST['21'],$_REQUEST['22'],$_REQUEST['23'],$_REQUEST['24'],$_REQUEST['25']);
+	$stmt->bind_param('ssissiii',$firstname,$lastname,$_REQUEST['box'],$_REQUEST['phone'],$_REQUEST['email'],$gender,$seeks,$paid);
 	$stmt->execute();
-	if ($stmt->insert_id >= 0)
-	{
-	    $stmt->close();
-	    $db->close();
-	    header("Location: saved.php");
-	}
-	else{
+	if ($stmt->insert_id < 0){
 	    $stmt->close();
 	    $db->close();
 	    die("Something went wrong");
 	}
+	$id = $stmt->insert_id;
     }
 }else
 {
-    if ($stmt->prepare("UPDATE `responses` SET `firstname`=?,`lastname`=?,`box`=?,`phone`=?,`gender`=?,`seeksmale`=?,`seeksfemale`=?,`paid`=?,`1`=?,`2`=?,`3`=?,`4`=?,`5`=?,`6`=?,`7`=?,`8`=?,`9`=?,`10`=?,`11`=?,`12`=?,`13`=?,`14`=?,`15`=?,`16`=?,`17`=?,`18`=?,`19`=?,`20`=?,`21`=?,`22`=?,`23`=?,`24`=?,`25`=? WHERE `id`=?"))
+    if ($stmt->prepare("UPDATE `profile` SET `firstname`=?,`lastname`=?,`box`=?,`phone`=?,`gender`=?,`seeks`=?,`paid`=? WHERE `id`=?"))
     {
-	$stmt->bind_param('ssisssssiiiiiiiiiiiiiiiiiiiiiiiiii',$firstname,$lastname,$_REQUEST['phone'],$_REQUEST['gender'],$_REQUEST['seeksmale'],$_REQUEST['seeksfemale'],$paid,$_REQUEST['1'],$_REQUEST['2'],$_REQUEST['3'],$_REQUEST['4'],$_REQUEST['5'],$_REQUEST['6'],$_REQUEST['7'],$_REQUEST['8'],$_REQUEST['9'],$_REQUEST['10'],$_REQUEST['11'],$_REQUEST['12'],$_REQUEST['13'],$_REQUEST['14'],$_REQUEST['15'],$_REQUEST['16'],$_REQUEST['17'],$_REQUEST['18'],$_REQUEST['19'],$_REQUEST['20'],$_REQUEST['21'],$_REQUEST['22'],$_REQUEST['23'],$_REQUEST['24'],$_REQUEST['25'],$id);
+	$stmt->bind_param('ssisiiii',$firstname,$lastname,$_REQUEST['box'],$_REQUEST['phone'],$gender,$seeks,$paid,$id);
 	$stmt->execute();
-	$stmt->close();
-	$db->close();
-	header("Location: saved.php");
+
     }
 
+
+}
+// First delete previous answers if any
+if ($stmt->prepare("DELETE FROM `response` WHERE `profile_id`=?"))
+{
+    $stmt->bind_param('i',$id);
+    $stmt->execute();
+}
+// insert question answers
+if ($stmt->prepare("INSERT INTO `response` (`profile_id`,`question_id`,`answer`) VALUES (?,?,?)"))
+{
+    $stmt->bind_param('iii',$id,$question,$answer);
+    foreach($_REQUEST as $key => $value)
+    {
+	$pos = strpos($key,'question_');
+	
+	if($pos === false) {
+	    continue;
+	}
+	else {
+	    $questionFrag = explode('_',$key);
+	    $question = intval($questionFrag[1]);
+	    $answer = intval($value);
+	    $stmt->execute();
+	}
+    }
+    $stmt->close();
+    $db->close();
+    header("Location: saved.php");
 
 }
 $db->close(); // Just in case
