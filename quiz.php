@@ -78,7 +78,7 @@ if ($stmt->prepare("SELECT `username` FROM `queue` WHERE `token`=?"))
                 </tr>
                 <tr>
                     <td>Send my results to box:</td>
-                    <td style="width:300px"><input name="box" id="box" class="validate[required]" placeholder="1337" /><span class="error"></span></td>
+                    <td style="width:300px"><input name="box" id="box" class="validate[required]" /><span class="error"></span></td>
                 </tr>
                 <tr>
                     <td>Public phone number:</td>

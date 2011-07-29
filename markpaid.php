@@ -3,7 +3,6 @@ ini_set('display_errors', '1');
 // TODO: CHECK LOGIN SESSION
 /*
 require_once("auth.php");
-
 if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
 {
     header("location: login.php");

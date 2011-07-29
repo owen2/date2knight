@@ -1,22 +1,27 @@
 <?php
 // A simple authentication library by Owen Johnson
 // auth.php
-// require_once this file before output starts. Call exactly one of the following auth functions.
+// require_once this file before output starts.
+session_start();
+require_once("config.php");
 
-function checkSimplePasskey($realpass, $challenge)
+
+
+if(isset($_SESSION['key']))
 {
-    if(isset($_SESSION['key']))
-    {
-        return $_SESSION['key'] == $realpass;
-    }
-    elseif ($realpass==$challenge)
-    {
-        $_SESSION['key'] = $challenge;
+    if ($_SESSION['key'] == Settings::$adminpass)
         return true;
-    }
     else
-    {
-        return false;
-    }
+        header("location: login.php");
 }
+elseif (Settings::$adminpass==$_REQUEST['pass'])
+{
+    $_SESSION['key'] = Settings::$adminpass;
+    return true;
+}
+else
+{
+    header("location: login.php");
+}   
+
 ?>

@@ -1,10 +1,5 @@
 <?php
-session_start();
 require_once("auth.php");
-if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
-{
-    header("location: login.php");
-}
 ?>
 <!doctype html>
 <html>
@@ -32,7 +27,7 @@ if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
     <body>
 
         <div class="centered bodywrap">
-		    <h1>Admin Page</h1>
+		    <h1><?php echo Settings::$name; ?> Admin Panel</h1>
 		    <div id="flex" class="flexigrid"></div>
 		    <?php
 /*

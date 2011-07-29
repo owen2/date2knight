@@ -1,3 +1,4 @@
+<?php require_once("config.php"); ?>
 <!doctype html>
 <html>
     <head>
@@ -11,19 +12,18 @@
     </head>
     <body>
         <div class="padded bodywrap">
-            <h1>Welcome to Date2Knight!</h1>
-            <p>A service from the Wartburg Computer Club to help you find a Valentine (or a new friend)</p>
+            <h1>Welcome to <?php echo(Settings::$name); ?>!</h1>
+            <p>A service from the <?php echo(Settings::$organization); ?> to help you find a Valentine (or a new friend)</p>
             <div class="content">
                 <h2>Here's how it works:</h2>
-                    <p>Step one: Take our survey and tell us about yourself.</p>
-                    <p>Step two: Order your top date and friend matches for $2.</p>
-                    <p>Step three: Find a date or a new friend.</p>
-                <h2>Let's get started!</h2>
-                    <p>Enter your wartburg email address:</p>
+                    <p><b>1:</b> Sign in and tell us about yourself.</p>
+                    <p><b>2:</b> Order your top matches.</p>
+                    <p><b>3:</b> Check your email.</p>
+                <h2>Ready to try?</h2>
+                    <p>Tell us your email address:</p>
                     <form id="form" name="login">
-                        <input name="email" id="email" class="validate[required]" type="email" placeholder="your.name" />@wartburg.edu
-                            
-                        <input type="submit" id="submit" value="Continue"/>
+                        <input name="email" id="email" class="validate[required]" type="email" placeholder="your.name" required="required" />@wartburg.edu
+                        <input type="submit" id="submit" value="Log In"/>
                     </form>
 		    <div id="loading"></div>
             </div>
