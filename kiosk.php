@@ -53,7 +53,7 @@ require_once("auth.php");
                     echo("</tr>");
                 }*/
 	     ?></table>
-	     <br><a href="stats.php">[stats]</a> <a href="report-all.php">[get all reports]</a> <a href="scripts/killsession.php">[logout]</a><br><br><?php
+	     <br><a href="stats.php">[stats]</a> <a href="report-all.php">[get all reports]</a> <a href="killsession.php">[logout]</a><br><br><?php
 			    ?>
         </div>
         <a href="cleardb.php?really=yes" style="font-size: xx-small">clear database? only click if you really mean it.</a><br>

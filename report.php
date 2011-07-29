@@ -1,7 +1,7 @@
 <?php error_reporting(E_ALL);
     ini_set('display_errors', '1');
-    require_once("auth.php");
 	 require_once("connect.php");
+// TODO: CHECK LOGIN WITH SESSION VARS
     
     $result = mysql_query("SELECT * FROM `responses` WHERE id=" . $_REQUEST['id']);
     $personA = mysql_fetch_array($result);
@@ -19,7 +19,7 @@
     
     function getTopDates($personA, $limit=10)
     {
-        if ($personA['paid'] != "paid")
+        if ($personA['paid'] != 1)
         {
             echo("Results are availible from the computer club for $2. Please mail an envelope with your name and $2 to Computer Club Box 707 or purchase results at our table in the student center. Also, why are you trying to steal your results? It isn't nice.");
             return false; 
@@ -96,7 +96,8 @@
     {
         $result = mysql_query("SELECT * FROM `responses` WHERE id=" . $id);
     $person = mysql_fetch_array($result);
-        echo($person['name']);
+    $name = $person['firstname'] . ' ' . $person['lastname'];
+        echo($name);
     }
     
     function printPhone($id)
@@ -153,7 +154,7 @@
 
 <body>
     <div class="padded bodywrap content">
-    <h1><?php echo($personA['name'] . "<br>Mailbox " . $personA['box']);?></h1>
+    <h1><?php echo($personA['firstname'] . ' ' . $personA['lastname'] . "<br>Mailbox " . $personA['box']);?></h1>
     <?php getTopDates($personA, 10); ?>
     <br><br>
     <p>Scores: &hearts;&hearts;&hearts;&hearts;&hearts; and &#9775;&#9775;&#9775;&#9775;&#9775; are the best ratings possible. &#9775;&#9775;&#9775; and above are considered good matches. The lowest possible score shows no &hearts; or &#9775;.</p>

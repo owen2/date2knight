@@ -1,5 +1,13 @@
 function doCommand(com,grid)
 {
+    if (com == "Get Report")
+    {
+	$('.trSelected',grid).each(function(){
+	    var id = $(this).attr('id');
+	    id = id.substring(id.lastIndexOf('row')+3);
+	    window.open("report.php?id=" + id);
+	});
+    }
     if (com == 'Mark Paid')
     {
 	$('.trSelected',grid).each(function(){
@@ -43,7 +51,8 @@ $(document).ready(function(){
 	],
 		buttons: [
 			  {name: "Mark Paid",bclass: "add",onpress: doCommand},
-			  {name: "Unmark Paid",bclass: "delete",onpress: doCommand}
+		    {name: "Unmark Paid",bclass: "delete",onpress: doCommand},
+		    {name: "Get Report",onpress: doCommand}
 			  ],
 	searchitems: [
 		      {display: "First Name",name: "firstname"},
