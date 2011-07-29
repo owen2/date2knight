@@ -1,6 +1,5 @@
 <?
-session_start();
-require_once("auth.php");
+require_once("auth.php"); // starts session
 require_once("connect.php");
 
 $page = 1; // The current page
