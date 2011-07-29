@@ -1,6 +1,6 @@
 <?
 session_start();
-// TODO: check logged in session var
+require_once("auth.php");
 require_once("connect.php");
 
 $page = 1; // The current page
