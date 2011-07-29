@@ -16,38 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `contacts`
---
-
-DROP TABLE IF EXISTS `contacts`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `contacts` (
-  `id` int(4) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(15) NOT NULL,
-  `last_name` varchar(15) NOT NULL,
-  `email` varchar(35) NOT NULL,
-  `address` varchar(50) NOT NULL,
-  `city` varchar(15) NOT NULL,
-  `state` varchar(15) NOT NULL,
-  `zip` int(10) NOT NULL,
-  `phone` varchar(12) NOT NULL,
-  `birthday` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `contacts`
---
-
-LOCK TABLES `contacts` WRITE;
-/*!40000 ALTER TABLE `contacts` DISABLE KEYS */;
-INSERT INTO `contacts` VALUES (1,'Chelsea','Reisner','chelsea.reisner@wartburg.edu','300 Birch Ave. Apt 4A','Waverly','IA',50677,'920-840-051','1991-03-19'),(2,'Barbara','Reisner','bjreisner@gmail.com','214 S. Bernard #2','Powell','WY',92435,'9202776006','0000-00-00'),(3,'Judy','Reisner','campernauts4928@aol.com','','','',0,'','0000-00-00'),(4,'Bobbie','Bee','','604 E. Grove St.','Pomona','CA',91767,'909-626-6782','0000-00-00'),(5,'Ernest','Zimdars','ezimdars@earthlink.net','276 E. Radcliffe Dr.','Claremont','CA',91711,'','0000-00-00'),(6,'','Tanner','','825 South Myrtle Avenue','Monrovia','CA',91016,'','0000-00-00'),(7,'Terry','Reisner','','214 S. Bernard #2','Powell','WY',82435,'','1955-07-09');
-/*!40000 ALTER TABLE `contacts` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `questions`
 --
 
@@ -161,4 +129,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-07-28 23:00:02
+-- Dump completed on 2011-07-29 12:07:09
