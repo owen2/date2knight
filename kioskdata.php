@@ -48,6 +48,10 @@ $sql = "SELECT paid,box,firstname,lastname,id FROM `responses` $searchSql $sortS
 $result = mysql_query($sql);
 while($row = mysql_fetch_assoc($result))
 {
+    if ($row['paid'] == 0)
+	$row['paid'] = 'No';
+    else
+	$row['paid'] = "Yes";
     $data["rows"][] = array("id" => $row['id'],
 			    "cell" => array($row['firstname'],$row['lastname'],$row['box'],$row['paid']));
 }

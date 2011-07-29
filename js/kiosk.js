@@ -1,7 +1,35 @@
 function doCommand(com,grid)
 {
-    return 0;
-
+    if (com == 'Mark Paid')
+    {
+	$('.trSelected',grid).each(function(){
+	    var id = $(this).attr('id');
+	    id = id.substring(id.lastIndexOf('row')+3);
+	    $.ajax({
+		url: "markpaid.php",
+		data: 'id=' + id,
+		type: 'post',
+		success: function(){
+		    $('#flex').flexReload();
+		}
+	    });
+	});
+    }
+    else if (com == 'Unmark Paid')
+    {
+	$('.trSelected',grid).each(function(){
+	    var id = $(this).attr('id');
+	    id = id.substring(id.lastIndexOf('row')+3);
+	    $.ajax({
+		url: "unmarkpaid.php",
+		data: 'id=' + id,
+		type: 'post',
+		success: function(){
+		    $('#flex').flexReload();
+		}
+	    });
+	});
+    }
 }
 $(document).ready(function(){
     $('#flex').flexigrid({
@@ -28,7 +56,7 @@ $(document).ready(function(){
 	rp: 10,
 	showTableToggleBtn: false,
 	resizable: true,
-	width:600,
+	width:960,
 	height:330,
 	singleSelect: true
     });

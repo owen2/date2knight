@@ -1,19 +1,22 @@
 <?php error_reporting(E_ALL);
 ini_set('display_errors', '1');
-
+// TODO: CHECK LOGIN SESSION
+/*
 require_once("auth.php");
 
 if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
 {
-    header("location: ../login.php");
+    header("location: login.php");
 }
-
+*/
 require_once("connect.php");
 
-$update = "UPDATE `lovematch`.`responses` SET `paid` = 'paid' WHERE `responses`.`id` =" .$_REQUEST['id'];
+$update = "UPDATE responses SET `paid` = 1 WHERE id =" .$_REQUEST['id'];
 $r = mysql_query("SELECT * FROM `responses` WHERE `id` = ". $_REQUEST['id']);
 $person = mysql_fetch_array($r);
-    $name = $person['name'];
+    $first = $person['firstname'];
+$last = $person['lastname'];
+    $name = $first . " " . $last;
     $email = $person['email'];
     $box = $person['box'];
 
