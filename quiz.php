@@ -90,7 +90,7 @@ if ($stmt->prepare("SELECT `username` FROM `queue` WHERE `token`=?"))
                 </tr>
                 <tr>
                     <td>Are you female or male?</td>
-                    <td><input type="radio" name="gender" value="1"/>Female<input type="radio" name="gender" value="0"/>Male</td>
+                    <td><input type="radio" name="gender" value="f"/>Female<input type="radio" name="gender" value="m"/>Male</td>
                 </tr>
                 <tr>
                     <td>Interested in men?</td><td><input class="loveseeking" type="checkbox" name="seeksmale"/>Match me with men. </td>

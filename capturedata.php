@@ -10,9 +10,9 @@ if (isset($_REQUEST['seeksfemale']) && $_REQUEST['seeksfemale'] == 'on')
     $seeks |= 2;
 
 if ($_REQUEST['gender'] == 'm')
-    $gender = 0;
-else
     $gender = 1;
+else
+    $gender = 2;
 $nameFrags = explode(" ",$_REQUEST['name']);
 $firstname = $nameFrags[0];
 $lastname = $nameFrags[1];

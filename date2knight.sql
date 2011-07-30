@@ -29,7 +29,7 @@ CREATE TABLE `profile` (
   `box` int(4) DEFAULT NULL,
   `phone` varchar(14) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
-  `gender` tinyint(1) DEFAULT NULL,
+  `gender` tinyint(2) DEFAULT NULL,
   `seeks` tinyint(2) DEFAULT NULL,
   `paid` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -129,4 +129,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-07-29 16:59:26
+-- Dump completed on 2011-07-30  0:05:54

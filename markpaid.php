@@ -1,5 +1,6 @@
 <?php error_reporting(E_ALL);
 ini_set('display_errors', '1');
+require_once('auth.php');
 // TODO: CHECK LOGIN SESSION
 /*
 require_once("auth.php");
@@ -10,7 +11,7 @@ if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
 */
 require_once("connect.php");
 
-$update = "UPDATE responses SET `paid` = 1 WHERE id =" .$_REQUEST['id'];
+$update = "UPDATE profile SET `paid` = 1 WHERE id =" .$_REQUEST['id'];
 $r = mysql_query("SELECT * FROM `responses` WHERE `id` = ". $_REQUEST['id']);
 $person = mysql_fetch_array($r);
     $first = $person['firstname'];
