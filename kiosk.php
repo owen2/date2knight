@@ -1,22 +1,36 @@
 <?php
-session_start();
 require_once("auth.php");
-if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
-{
-    header("location: login.php");
-}
 ?>
 <!doctype html>
 <html>
     <head>
-        <link rel="stylesheet" href="css/style.css" media="screen" />
-        <link rel="stylesheet" href="css/print.css" media="print" />
+      <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
+      <script type="text/javascript" src="js/jquery-ui-1.8.13.custom.min.js"></script>
+      <script type="text/javascript" src="js/flexigrid.pack.js"></script>
+      <script type="text/javascript" src="js/kiosk.js"></script>
+      <link rel="stylesheet" href="css/style.css" media="screen" />
+      <link rel="stylesheet" href="css/print.css" media="print" />
+      <link type="text/css" href="css/ui-darkness/jquery-ui-1.8.13.custom.css" rel="stylesheet" />
+      <link rel="stylesheet" media="screen" href="flexstyle/flexigrid.pack.css" type="text/css" />      
+      <style>
+.flexigrid div.fbutton .add {
+    background: url("flexstyle/images/add.png") no-repeat scroll left center transparent;
+}
+.flexigrid div.fbutton .delete {
+    background: url("flexstyle/images/delete.png") no-repeat scroll left center transparent;
+}
+	div.ui-dialog{
+ font-size:10px;
+}
+	</style>
     </head>
     <body>
 
         <div class="centered bodywrap">
-		    <h1>Admin Page</h1>
+		    <h1><?php echo Settings::$name; ?> Admin Panel</h1>
+		    <div id="flex" class="flexigrid"></div>
 		    <?php
+/*
 		       require_once("connect.php");
 				 mysql_query("USE `lovematch`");
 			    $result = mysql_query("SELECT * FROM `responses` ORDER BY `name`;");
@@ -34,12 +48,12 @@ if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
                     echo("<tr>");
                     echo("<td>". $row['name'] ."</td>");
                     echo("<td>");
-                    if ($row['paid'] == "paid"){echo('<a href="report.php?id='. $row['id'] .'">get report</a></td><td>');}else{echo('</td><td><a href="scripts/markpaid.php?id='. $row['id'] .'">mark as paid</a>');}
+                    if ($row['paid'] == "paid"){echo('<a href="report.php?id='. $row['id'] .'">get report</a></td><td>');}else{echo('</td><td><a href="markpaid.php?id='. $row['id'] .'">mark as paid</a>');}
                     echo("</td>");
                     echo("</tr>");
-                }
+                }*/
 	     ?></table>
-	     <br><a href="stats.php">[stats]</a> <a href="report-all.php">[get all reports]</a> <a href="scripts/killsession.php">[logout]</a><br><br><?php
+	     <br><a href="stats.php">[stats]</a> <a href="report-all.php">[get all reports]</a> <a href="killsession.php">[logout]</a><br><br><?php
 			    ?>
         </div>
         <a href="cleardb.php?really=yes" style="font-size: xx-small">clear database? only click if you really mean it.</a><br>
