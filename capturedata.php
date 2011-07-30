@@ -38,9 +38,9 @@ if ($stmt->prepare("SELECT `id` FROM `profile` WHERE `email`=?"))
 }
 if ($id == 'flag') // New user profile
 {
-    if ($stmt->prepare("INSERT INTO `profile` (`firstname`,`lastname`,`box`,`phone`,`email`,`gender`,`seeks`,`paid`) VALUES(?,?,?,?,?,?,?,?)"))
+    if ($stmt->prepare("INSERT INTO `profile` (`firstname`,`lastname`,`box`,`phone`,`email`,`gender`,`seeks`,`paid`,`bio`) VALUES(?,?,?,?,?,?,?,?,?)"))
     {
-	$stmt->bind_param('ssissiii',$firstname,$lastname,$_REQUEST['box'],$_REQUEST['phone'],$_REQUEST['email'],$gender,$seeks,$paid);
+	$stmt->bind_param('ssissiiis',$firstname,$lastname,$_REQUEST['box'],$_REQUEST['phone'],$_REQUEST['email'],$gender,$seeks,$paid,$_REQUEST['bio']);
 	$stmt->execute();
 	if ($stmt->insert_id < 0){
 	    $stmt->close();
@@ -51,9 +51,9 @@ if ($id == 'flag') // New user profile
     }
 }else
 {
-    if ($stmt->prepare("UPDATE `profile` SET `firstname`=?,`lastname`=?,`box`=?,`phone`=?,`gender`=?,`seeks`=?,`paid`=? WHERE `id`=?"))
+    if ($stmt->prepare("UPDATE `profile` SET `firstname`=?,`lastname`=?,`box`=?,`phone`=?,`gender`=?,`seeks`=?,`paid`=?,`bio`=? WHERE `id`=?"))
     {
-	$stmt->bind_param('ssisiiii',$firstname,$lastname,$_REQUEST['box'],$_REQUEST['phone'],$gender,$seeks,$paid,$id);
+	$stmt->bind_param('ssisiiisi',$firstname,$lastname,$_REQUEST['box'],$_REQUEST['phone'],$gender,$seeks,$paid,$_REQUEST['bio'],$id);
 	$stmt->execute();
 
     }

@@ -32,6 +32,7 @@ CREATE TABLE `profile` (
   `gender` tinyint(2) DEFAULT NULL,
   `seeks` tinyint(2) DEFAULT NULL,
   `paid` tinyint(1) DEFAULT NULL,
+  `bio` text,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -129,4 +130,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-07-30  0:05:54
+-- Dump completed on 2011-07-30 12:17:42

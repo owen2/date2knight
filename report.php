@@ -52,6 +52,7 @@ function getTopDates($personA, $limit=10)
 	 <th>Say Hello:</th>
 	 <th>Leave a note:</th>
 	 <th>Score:</th>
+	 <th>Personal Bio:</th>
 	 </tr>
 	 <?php
         $count = 0;
@@ -59,7 +60,7 @@ function getTopDates($personA, $limit=10)
     {
 	$count++;
 	if ($count > $limit){break;}
-	?><tr><td><?php printName($id); ?></td><td><?php printPhone($id); ?></td><td>Mailbox <?php printBox($id); ?></td><td><?php printHearts($matchscore, "&hearts;");?></td></tr><?php
+	?><tr><td><?php printName($id); ?></td><td><?php printPhone($id); ?></td><td>Mailbox <?php printBox($id); ?></td><td><?php printHearts($matchscore, "&hearts;");?></td><td><?php printBio($id); ?></td></tr><?php
     }?>
     <tr>
 	 <td><br /></td>
@@ -72,6 +73,7 @@ function getTopDates($personA, $limit=10)
 	 <th>Say Hello:</th>
             <th>Leave a note:</th>
 	 <th>Score:</th>
+	 <th>Personal Bio:</th>
 	 </tr>
 	 <?php
 	 $count = 0;
@@ -121,7 +123,12 @@ function printBox($id)
     $person = mysql_fetch_array($result);
     echo($person['box']);
 }
-
+function printBio($id)
+{
+    $result = mysql_query("SELECT bio FROM profile WHERE id='$id'");
+    $row = mysql_fetch_row($result);
+    echo($row[0]);
+}
 function printHearts($score, $char)
 {
     $h5 = 10;
