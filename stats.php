@@ -1,3 +1,10 @@
+<?php
+    require_once("auth.php");		        
+    require_once("connect.php");
+//    require_once("auth.php");
+//    if (!checkSimplePasskey("missingbytes", $_SESSION['realpass']))
+//        header("Location: login.php");
+?>
 <!doctype html>
 <html>
     <head>
@@ -9,7 +16,7 @@
         <div class="centered bodywrap">
 		    <h1>Date 2 Knight Stats Page</h1>
 		    <?php
-				 require_once("scripts/connect.php");
+	// Since these are all separate queries with no user inputs mysqli doesn't help us significantly.
 			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses`");
 			    $count = mysql_fetch_array($count_result);
 			    echo("Of ". $count['total'] . " people who took the survey...<br><br>");

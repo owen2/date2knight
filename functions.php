@@ -1,10 +1,7 @@
 <?php
+require_once("config.php");
 function db_connect()
 {
-    $host = 'localhost';
-    $user = 'lovematch';
-    $password = 'lovematch';
-    $db = 'lovematch';
-    return new mysqli($host,$user,$password,$db);
+    return new mysqli(DbAuth::$host,DbAuth::$user,DbAuth::$password,DbAuth::$db);
 }
 ?>

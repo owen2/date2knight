@@ -2,15 +2,8 @@
     //error_reporting(E_ALL);
     //ini_set('display_errors', '1');
 
-    session_start();
-
     require_once("auth.php");
-    if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
-    {
-        header("location: login.php");
-    }
     require_once("connect.php");
-
 
     //////////////////////
     function canDoIt($a, $b)
@@ -168,7 +161,7 @@
 
 <body>
     <?php
-       require_once("scripts/connect.php");
+       require_once("connect.php");
 	    $result = mysql_query("SELECT * FROM `responses` WHERE `paid` = 'paid' ORDER BY `box`;");
 	    while($person = mysql_fetch_array($result))
 	    {
