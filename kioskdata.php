@@ -30,7 +30,7 @@ if (isset($_POST['rp'])) {
 $sortSql = "order by $sortname $sortorder";
 $searchSql = ($qtype != '' && $query != '') ? "where $qtype = '$query'" : '';
 
-$sql = "SELECT COUNT(*) from responses $searchSql";
+$sql = "SELECT COUNT(*) from profile $searchSql";
 
 $result = mysql_query($sql);
 $row = mysql_fetch_array($result);
@@ -43,7 +43,7 @@ $data["page"] = $page;
 $data["total"] = $total;
 $data["rows"] = array();
 
-$sql = "SELECT paid,box,firstname,lastname,id FROM `responses` $searchSql $sortSql $limitSql";
+$sql = "SELECT paid,box,firstname,lastname,id FROM `profile` $searchSql $sortSql $limitSql";
 $result = mysql_query($sql);
 while($row = mysql_fetch_assoc($result))
 {

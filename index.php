@@ -23,7 +23,7 @@
                     <p>Tell us your email address:</p>
                     <form id="form" name="login">
                         <input name="email" id="email" class="validate[required]" type="email" placeholder="your.name" required="required" />@wartburg.edu
-                        <input type="submit" id="submit" value="Log In"/>
+                        <input type="submit" id="submit" value="Submit"/>
                     </form>
 		    <div id="loading"></div>
             </div>

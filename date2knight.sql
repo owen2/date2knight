@@ -59,7 +59,7 @@ CREATE TABLE `question` (
   `righttext` text NOT NULL,
   `enable` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,6 +68,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
+INSERT INTO `question` VALUES (1,'How much do you enjoy playing video games with other people?','Sounds boring.','I &hearts; LAN parties!',1),(2,'Does a night at home watching movies sound like a good date?','Sounds boring.','Sounds fun and cozy!',1),(3,'Are you more introverted or extroverted?','Introverted','Extroverted',1),(4,'How much do you enjoy (or tolerate) smoking?','I can\'t stand smokers.','I blaze 3 packs per day.',1),(5,'Do you enjoy parties that involve alcohol?','I prefer dry parties.','Liquor me up!',1),(6,'Is a physical relationship important to you?','I\'m waiting for marriage.','Twice on Sundays!',1),(7,'Where do you stand in politics?','Way liberal','Way conservative',1),(8,'How important is personal hygiene to you?','Stinky Green','Squeaky Clean!',1),(9,'Do you like to dress up and go out on the town?','I\'d rather not go outside.','Puttin\' on the Ritz.',1),(10,'How much do you enjoy dancing?','Three left feet...','Let\'s take ballroom lessons!',1),(11,'How important is good fashion sense to you?','Not so important','Very important',1),(12,'Because pop culture demands it...','Team Edward','Team Jacob',1),(13,'Sudoku puzzles are...','Confusing','Fun',1),(14,'Hunting animals is...','Wrong','Fun',1),(15,'What are your feelings on watching a sporting event?','Sports are dumb.','I\'m a sports nerd!',1),(16,'How important to you is having the same religion?','I couldn\'t care less.','It\'s a necessity.',1),(17,'Eventually, how many kids do you want to have?','Cats only, please.','About a dozen kids.',1),(18,'Are you looking more for potential spouses or casual fun?','One night stand','Lifelong companion',1),(19,'Do you consider yourself more romantic or level-headed?','Steadfast stoic','Hopeless romantic',1),(20,'Which best describes your sleeping habits?','Early to bed, early to rise','Stay up, sleep in',1),(21,'Do you consider yourself more playful or serious?','Serious','Playful',1),(22,'How clean do you like to keep your room?','I think that was soup...','Spotless!',1),(23,'How willing are you to share your belongings and space?','I share nothing.','I\'ll share everything.',1),(24,'How comfortable are you with physical affection?','I have a big bubble.','I\'m touchy feely.',1),(25,'I play my music...','...in earbuds.','...loud enough for the hall.',1);
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,4 +129,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-07-29 16:00:36
+-- Dump completed on 2011-07-29 16:59:26
