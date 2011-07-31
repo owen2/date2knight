@@ -91,4 +91,13 @@ $(document).ready(function(){
 	height: 390,
 	singleSelect: true
     });
+    $('#flex').dblclick(function(e){
+	    target = $(e.target);
+
+	    while(target.get(0).tagName != "TR"){
+		target = target.parent();
+	    }
+	    var questionId = target.get(0).id.substr(3);
+	    $('#formspace').html('<img src="images/spinner.gif"> &nbsp; Processing...').load('questionform.php',{id: questionId});
+	});
 });
