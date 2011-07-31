@@ -25,6 +25,10 @@ require_once("auth.php");
 	div.ui-dialog{
  font-size:10px;
 }
+textarea{
+height: 100px;
+width: 290px;
+}
 	</style>
     </head>
     <body>

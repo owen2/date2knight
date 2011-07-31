@@ -23,9 +23,9 @@ if (isset($_REQUEST['id']))
   <th>Right Text</th>
 </tr>
 <tr>
-    <td><textarea rows="5" cols="40" id="left"><?php echo($left); ?></textarea></td>
-    <td><textarea rows="5" cols="40" id="question"><?php echo($question); ?></textarea></td>
-    <td><textarea rows="5" cols="40" id="right"><?php echo($right); ?></textarea></td>
+    <td><textarea id="left"><?php echo($left); ?></textarea></td>
+    <td><textarea id="question"><?php echo($question); ?></textarea></td>
+    <td><textarea id="right"><?php echo($right); ?></textarea></td>
 </tr>
 </table>
 <br />
