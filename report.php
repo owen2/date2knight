@@ -31,7 +31,7 @@ function getTopDates($personA, $limit=10)
     }
     $matchlist = array();
     $friendlist = array();
-    $results = mysql_query("SELECT id FROM `profile` WHERE `id` <> " . $personA);
+    $results = mysql_query("SELECT id FROM `profile` WHERE `id` <> " . $personA . " AND validated='true'");
     while ($personB = mysql_fetch_array($results))
     {
 	$personBid = $personB[0];

@@ -23,7 +23,7 @@
                 <h2>Ready to try?</h2>
                     <p>Tell us your email address:</p>
                     <form id="form" name="login">
-		        <input type="hidden" value="1" name="instant" />
+		        <input type="hidden" value="1" id="instant" />
                         <input name="email" id="email" class="validate[required]" type="email" placeholder="first.last" required="required" />@wartburg.edu
                         <input type="submit" id="submit" value="Submit"/>
                     </form>
