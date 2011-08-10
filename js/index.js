@@ -9,7 +9,6 @@ $(document).ready(function(){
 		var formAction = 'instantproc.php';
 	    else
 		var formAction = 'indexproc.php';
-	
 	    $.ajax({
 		type: 'post',
 		url: formAction,
