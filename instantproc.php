@@ -1,5 +1,7 @@
 <?php
 require_once("functions.php");
+if (!isset($_SESSION))
+   session_start();
 $flag = strpos($_POST['email'],'@');
 if (!($flag === false))
     die('<font color="red">Only enter your username (not full email address)</font>');
@@ -47,5 +49,7 @@ $body .= "Click on the following link to validate your responses. \r\n" . $link 
 $headers = "From: date2knight@gmail.com";
 mail($to,"Validation Required",$body,$headers);
 $_SESSION['instant'] = $token;
-header('Location: quiz.php');
 ?>
+<script type="text/javascript">
+document.location = 'quiz.php';
+</script>

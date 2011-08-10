@@ -4,8 +4,6 @@ include('functions.php');
 
 $paid = 0;
 $seeks = 0;
-if (isset($_SESSION['instant']))
-    unset($_SESSION['instant']);
 if (isset($_REQUEST['seeksmale']) && $_REQUEST['seeksmale'] == 'on')
     $seeks |= 1;
 if (isset($_REQUEST['seeksfemale']) && $_REQUEST['seeksfemale'] == 'on')

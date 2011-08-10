@@ -30,6 +30,10 @@ if (isset($_POST['rp'])) {
 $sortSql = "order by $sortname $sortorder";
 $searchSql = ($qtype != '' && $query != '') ? "where $qtype = '$query'" : '';
 
+if (strlen($searchSql) == 0)
+    $searchSql = "where validated='true'";
+else
+    $searchSql .= " AND validated='true'";
 $sql = "SELECT COUNT(*) from profile $searchSql";
 
 $result = mysql_query($sql);

@@ -1,6 +1,8 @@
 <?php error_reporting(E_ALL);
 ini_set('display_errors', '1');
 include("functions.php");
+if (!isset($_SESSION))
+   session_start();
 $name = "Test User";
 $email = "spam@colorfullimo.com";
 
@@ -14,13 +16,14 @@ if (isset($_SESSION['instant']))
 	$stmt->execute();
 	$stmt->store_result();
 	$stmt->bind_result($firstname,$lastname,$email);
+	$token = $_SESSION['instant'];
 	if ($stmt->num_rows < 1)
 	{
-	    die('<font color="red">Your unique code was not found. Please try again.</font>');
+	    die('<font color="red">Your unique code [' . $token . '] was not found. Please try again.</font>');
 	}
 	$stmt->fetch();
 	$stmt->free_result();
-	$name = $first . ' ' . $last;
+	$name = $firstname . ' ' . $lastname;
     }
 }else
 {
