@@ -12,7 +12,7 @@ $token = md5(microtime() . $_POST['email']);
 $db = db_connect();
 $stmt = $db->stmt_init();
 // Check if there is already a profile for this user
-/*
+
 if ($stmt->prepare("SELECT id FROM `profile` WHERE `email`=?"))
 {
     $stmt->bind_param('s',$to);
@@ -23,9 +23,14 @@ if ($stmt->prepare("SELECT id FROM `profile` WHERE `email`=?"))
 	$stmt->free_result();
 	$stmt->close();
 	$db->close();
-	header("Location: index.php");
+	echo '<font color="red">';
+	echo("You have already taken this quiz.");
+	echo " You can go to " . Settings::$baseurl;
+	echo " to retake the quiz.";
+	echo '</font>';
+	die();
     }
-    }*/
+}
 $sql = "INSERT INTO profile (firstname,lastname,email,validated) VALUES (?,?,?,?)";
 if ($stmt->prepare($sql))
 {
