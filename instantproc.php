@@ -46,5 +46,6 @@ $body .= "Click on the following link to validate your responses. \r\n" . $link 
 
 $headers = "From: date2knight@gmail.com";
 mail($to,"Validation Required",$body,$headers);
-echo "<font color=\"green\">Message has been sent</font>";
+$_SESSION['instant'] = $token;
+header('Location: quiz.php');
 ?>

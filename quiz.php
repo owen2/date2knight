@@ -6,22 +6,41 @@ $email = "spam@colorfullimo.com";
 
 $db = db_connect();
 $stmt = $db->stmt_init();
-if ($stmt->prepare("SELECT `username` FROM `queue` WHERE `token`=?"))
+if (isset($_SESSION['instant']))
 {
-    $stmt->bind_param('s',$_GET['token']);
-    $stmt->execute();
-    $stmt->store_result();
-    $stmt->bind_result($username);
-    if ($stmt->num_rows < 1)
+    if ($stmt->prepare("SELECT firstname,lastname,email FROM profile WHERE validated=?"))
     {
-	die('<font color="red">Your unique code was not found. Please try again.</font>');
+	$stmt->bind_param('s',$_SESSION['instant']);
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->bind_result($firstname,$lastname,$email);
+	if ($stmt->num_rows < 1)
+	{
+	    die('<font color="red">Your unique code was not found. Please try again.</font>');
+	}
+	$stmt->fetch();
+	$stmt->free_result();
+	$name = $first . ' ' . $last;
     }
-    $stmt->fetch();
-    $stmt->free_result();
-    $email = $username . '@wartburg.edu';
-    $nameFrag = explode('.',$username);
-    $name = ucfirst($nameFrag[0]) . ' ' . ucfirst($nameFrag[1]);
-
+}else
+{
+    if ($stmt->prepare("SELECT `username` FROM `queue` WHERE `token`=?"))
+    {
+	$stmt->bind_param('s',$_GET['token']);
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->bind_result($username);
+	if ($stmt->num_rows < 1)
+	{
+	    die('<font color="red">Your unique code was not found. Please try again.</font>');
+	}
+	$stmt->fetch();
+	$stmt->free_result();
+	$email = $username . '@wartburg.edu';
+	$nameFrag = explode('.',$username);
+	$name = ucfirst($nameFrag[0]) . ' ' . ucfirst($nameFrag[1]);
+	
+    }
 }
 ?>
 
