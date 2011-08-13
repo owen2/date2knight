@@ -38,7 +38,7 @@ if ($stmt->prepare("SELECT `id` FROM `profile` WHERE `email`=?"))
 }
 if ($id == 'flag') // New user profile
 {
-    if ($stmt->prepare("INSERT INTO `profile` (`firstname`,`lastname`,`box`,`phone`,`email`,`gender`,`seeks`,`paid`,`bio`) VALUES(?,?,?,?,?,?,?,?,?)"))
+    if ($stmt->prepare("INSERT INTO `profile` (`firstname`,`lastname`,`box`,`phone`,`email`,`gender`,`seeks`,`paid`,`bio`,`validated`) VALUES(?,?,?,?,?,?,?,?,?,'true')"))
     {
 	$stmt->bind_param('ssissiiis',$firstname,$lastname,$_REQUEST['box'],$_REQUEST['phone'],$_REQUEST['email'],$gender,$seeks,$paid,$_REQUEST['bio']);
 	$stmt->execute();
