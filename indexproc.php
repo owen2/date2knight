@@ -28,7 +28,7 @@ if ($stmt->prepare("INSERT INTO `queue` (`username`,`token`) VALUES (?,?)"))
 }
 $db->close();
 $mail = new PHPMailer();
-$link = Settings::$baseurl .'date2knight/quiz.php?token=' . $token;
+$link = Settings::$baseurl .'quiz.php?token=' . $token;
 $body = "Hi $first $last!\r\n";
 $body .= "The " . Date('Y') . " edition of Wartburg's is ready and waiting for you as requested.\r\n";
 $body .= "Click on the following link to get started. \r\n" . $link . "\r\n\r\nThank you!\r\nWartburg Computer Club\r\n";
@@ -49,7 +49,7 @@ $mail->AddAddress($to,$toName);
 if(!$mail->Send()) {
     echo "<font color=\"red\">Mailer Error: " . $mail->ErrorInfo . '</font>';
 } else {
-  echo "<font color=\"green\">Message has been sent</font>";
+  echo "<font color=\"green\">We sent you a message with a link to the quiz! Thanks for signing up.</font>";
 }
 
 ?>
