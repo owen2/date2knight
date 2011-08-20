@@ -4,7 +4,7 @@ if (!isset($_SESSION))
    session_start();
 $flag = strpos($_POST['email'],'@');
 if (!($flag === false))
-    die('<font color="red">Only enter your username (not full email address)</font>');
+    die('<div style="color: red">Only enter your username (not full email address)</div>');
 $to = $_POST['email'] . '@wartburg.edu';
 $emailFrags = explode('.',$_POST['email']);
 $first = ucfirst($emailFrags[0]);
@@ -25,11 +25,11 @@ if ($stmt->prepare("SELECT id FROM `profile` WHERE `email`=?"))
 	$stmt->free_result();
 	$stmt->close();
 	$db->close();
-	echo '<font color="red">';
-	echo("You have already taken this quiz.");
-	echo " You can go to " . Settings::$baseurl;
-	echo " to retake the quiz.";
-	echo '</font>';
+	echo '<div style="color: green">';
+	echo("We already have a profile for you.");
+	echo " You can go to </a href=\"" . Settings::$baseurl. "\">".Settings::$baseurl."</a>";
+	echo " to retake the quiz if you wish.";
+	echo '</div>';
 	die();
     }
 }
@@ -41,7 +41,7 @@ if ($stmt->prepare($sql))
     $stmt->close();
 }
 $db->close();
-$link = Settings::$baseurl .'date2knight/validate.php?token=' . $token;
+$link = Settings::$baseurl .'validate.php?token=' . $token;
 $body = "Hi $first $last!\r\n";
 $body .= "Your responses must be validated!\r\n";
 $body .= "Click on the following link to validate your responses. \r\n" . $link . "\r\n\r\nThank you!\r\nWartburg Computer Club\r\n";
