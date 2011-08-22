@@ -5,7 +5,7 @@ if (!isset($_SESSION))
 $flag = strpos($_POST['email'],'@');
 if (!($flag === false))
     die('<div style="color: red">Only enter your username (not full email address)</div>');
-$to = $_POST['email'] . '@wartburg.edu';
+$to = $_POST['email'] . Settings::$validEmailDomain;
 $emailFrags = explode('.',$_POST['email']);
 $first = ucfirst($emailFrags[0]);
 $last = ucfirst($emailFrags[1]);

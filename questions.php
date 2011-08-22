@@ -34,8 +34,10 @@ width: 290px;
     <body>
         <div class="centered bodywrap">
 	    <h1><?php echo Settings::$name; ?> Question Editor</h1>
+	    <?php if (!Settings::isPollOpen()){?>
 	    <div id="flex" class="flexigrid"></div>
 	    <div id="formspace"></div>
+	    <?php } else { ?> <div class="error"> To ensure fair comparison, the quiz cannot be edited while the poll is active. </div><?php } ?>
 	    <br />
 	    <a href="kiosk.php">[kiosk]</a> <a href="killsession.php">[logout]</a>
 	</div>

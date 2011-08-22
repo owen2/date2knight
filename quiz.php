@@ -1,5 +1,12 @@
 <?php error_reporting(E_ALL);
 ini_set('display_errors', '1');
+
+require_once("config.php");
+if (!Settings::isPollOpen())
+{
+    die("The quiz isn't open, but you should come back on ". Settings::$pollMonthOpen."/".Settings::$pollDayOpen);
+}
+
 include("functions.php");
 if (!isset($_SESSION))
    session_start();
