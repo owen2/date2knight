@@ -1,6 +1,7 @@
 <?php
     require_once("auth.php");		        
     require_once("connect.php");
+require_once("functions.php");
 //    require_once("auth.php");
 //    if (!checkSimplePasskey("missingbytes", $_SESSION['realpass']))
 //        header("Location: login.php");
@@ -15,57 +16,31 @@
 
         <div class="centered bodywrap">
 		    <h1>Date 2 Knight Stats Page</h1>
-		    <?php
-	// Since these are all separate queries with no user inputs mysqli doesn't help us significantly.
-			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses`");
-			    $count = mysql_fetch_array($count_result);
-			    echo("Of ". $count['total'] . " people who took the survey...<br><br>");
-			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses` WHERE `gender` = 'f'");
-			    $count =  mysql_fetch_array($count_result);
-			    echo("There are ". $count['total'] ." women.<br>");
-			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses` WHERE `gender` = 'm'");
-			    $count =  mysql_fetch_array($count_result);
-			    echo("There are ". $count['total'] ." men.<br>");
-			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses` WHERE `seeksmale` = 'on' AND `seeksfemale` = 'on'");
-			    $count =  mysql_fetch_array($count_result);
-			    echo("There are ". $count['total'] ." bisexuals.<br>");
-			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses` WHERE `seeksmale` = 'on' AND `gender` = 'm'");
-			    $count =  mysql_fetch_array($count_result);
-			    echo("There are ". $count['total'] ." gays.<br>");
-			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses` WHERE `gender` = 'f' AND `seeksfemale` = 'on'");
-			    $count =  mysql_fetch_array($count_result);
-			    echo("There are ". $count['total'] ." lesbians.<br>");
-			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses` WHERE `1` = '10'");
-			    $count =  mysql_fetch_array($count_result);
-			    echo("There are ". $count['total'] ." who &hearts; LAN parties.<br>");
-			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses` WHERE `12` < 5");
-			    $count =  mysql_fetch_array($count_result);
-			    echo($count['total'] ." prefer Edward. ");
-			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses` WHERE `12` > 5");
-			    $count =  mysql_fetch_array($count_result);
-			    echo($count['total'] ." prefer Jacob. ");
-			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses` WHERE `12` = 5");
-			    $count =  mysql_fetch_array($count_result);
-			    echo($count['total'] ." don't care about Twilight.<br>");
-			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses` WHERE `4` < 3");
-			    $count =  mysql_fetch_array($count_result);
-			    echo($count['total'] ." wouldn't date a smoker. ");
-			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses` WHERE `5` < 5");
-			    $count =  mysql_fetch_array($count_result);
-			    echo($count['total'] ." wouldn't date a drinker.<br>");
-			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses` WHERE `3` < 5");
-			    $count =  mysql_fetch_array($count_result);
-			    echo($count['total'] ." are introverts, ");
-			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses` WHERE `3` > 5");
-			    $count =  mysql_fetch_array($count_result);
-			    echo($count['total'] ." extroverts.<br>");
-			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses` WHERE `10`> 5");
-			    $count =  mysql_fetch_array($count_result);
-			    echo($count['total'] ." like to dance.<br>");
-			    $count_result= mysql_query("SELECT COUNT(*) AS `total` FROM `responses` WHERE `22`< 5");
-			    $count =  mysql_fetch_array($count_result);
-			    echo($count['total'] ." keep a messy room.<br>");
-        ?>
+<?php
+$db = db_connect();
+$stmt = $db->stmt_init();
+$word[0] = 'person';
+$word[1] = 'people';
+
+$result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated='true'");
+$count = mysql_fetch_row($result);
+echo "Of ". $count[0] . ' people who took the survey...<br /><br />';
+$result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated='true' AND gender=2");
+$count = mysql_fetch_row($result);
+echo "There are " . $count[0] . " women.<br />";
+$result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated='true' AND gender=1");
+$count = mysql_fetch_row($result);
+echo "There are " . $count[0] . " men.<br />";
+$result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated='true' AND seeks=3");
+$count =  mysql_fetch_row($result);
+echo("There are ". $count[0] ." bisexuals.<br>");
+$result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated='true' AND seeks=1 AND gender=1");
+$count = mysql_fetch_row($result);
+echo("There are ". $count[0] ." gays.<br>");
+$result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated='true' AND seeks=2 AND gender=2");
+$count = mysql_fetch_row($result);
+echo("There are ". $count[0] ." lesbians.<br>");
+?>
         </div>
     </body>
 </html>
