@@ -39,7 +39,7 @@ width: 290px;
 	    <div id="formspace"></div>
 	    <?php } else { ?> <div class="error"> To ensure fair comparison, the quiz cannot be edited while the poll is active. </div><?php } ?>
 	    <br />
-	    <a href="kiosk.php">[kiosk]</a> <a href="killsession.php">[logout]</a>
+	    <a href="admin.php">[back]</a> <a href="killsession.php">[logout]</a>
 	</div>
 	
     </body>
