@@ -41,7 +41,7 @@ $mail->Host = "smtp.gmail.com";
 $mail->Port = 465;
 $mail->Username = "date2knight@gmail.com";
 $mail->Password = "datepass";
-$mail->SetFrom("date2knight@gmail.com","Match Maker");
+$mail->SetFrom("date2knight@gmail.com",Settings::$envelopeFrom);
 $mail->Subject = "Pending Quiz";
 $mail->Body = $body;
 $mail->AddAddress($to,$toName);
