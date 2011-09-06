@@ -1,6 +1,9 @@
 <?php
 require_once("auth.php");
 require_once('functions.php');
+$left = '';
+$right = '';
+$question = '';
 if (isset($_REQUEST['id']))
 {
     $db = db_connect();
