@@ -1,14 +1,14 @@
 <?php error_reporting(E_ALL);
 ini_set('display_errors', '1');
-require_once("auth.php");
+//require_once("auth.php");
 require_once("connect.php");
 
-$personA = $_REQUEST['id'];
-$result = mysql_query("SELECT firstname,lastname,box FROM profile WHERE id=$personA");
-$row = mysql_fetch_assoc($result);
-$first = $row['firstname'];
-$last = $row['lastname'];
-$box = $row['box'];
+//$personA = $_REQUEST['id'];
+//$result = mysql_query("SELECT firstname,lastname,box FROM profile WHERE id=$personA");
+//$row = mysql_fetch_assoc($result);
+//$first = $row['firstname'];
+//$last = $row['lastname'];
+//$box = $row['box'];
 //////////////////////
 function canDoIt($a, $b)
 {/////////////////////////////
@@ -26,7 +26,7 @@ function getTopDates($personA, $limit=10)
     $row = mysql_fetch_array($result);
     if ($row['paid'] != 1)
     {
-	echo("Results are availible from the computer club for $2. Please mail an envelope with your name and $2 to Computer Club Box 707 or purchase results at our table in the student center. Also, why are you trying to steal your results? It isn't nice.");
+	echo("Why are you trying to steal your results? It isn't nice.");
 	return false; 
     }
     $matchlist = array();
@@ -48,7 +48,7 @@ function getTopDates($personA, $limit=10)
     
     <table width = 100%>
 	 <tr>
-	 <th>Love Matches</th>
+	 <th>Dating Matches</th>
 	 <th>Say Hello:</th>
 	 <th>Leave a note:</th>
 	 <th>Score:</th>
@@ -69,7 +69,7 @@ function getTopDates($personA, $limit=10)
             <td><br /></td>
 	 </tr>
 	 <tr>
-	 <th>Buddy Matches</th>
+	 <th>Friendship Matches</th>
 	 <th>Say Hello:</th>
             <th>Leave a note:</th>
 	 <th>Score:</th>
@@ -162,7 +162,7 @@ function decrapify($phone)
     //return $phone;
 }
 ?>
-<!doctype html>
+<!--<!doctype html>
 <head>
 <link rel="stylesheet" href="css/print.css" />
     </head>
@@ -174,4 +174,4 @@ function decrapify($phone)
     <br><br>
     <p>Scores: &hearts;&hearts;&hearts;&hearts;&hearts; and &#9775;&#9775;&#9775;&#9775;&#9775; are the best ratings possible. &#9775;&#9775;&#9775; and above are considered good matches. The lowest possible score shows no &hearts; or &#9775;.</p>
     </div>
-    </body>
+    </body>-->
