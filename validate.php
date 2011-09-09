@@ -1,14 +1,10 @@
 <?
-require_once('functions.php');
+require_once("config.php");
+require_once("connect.php");
 
-$db = db_connect();
-$stmt = $db->stmt_init();
-if ($stmt->prepare("UPDATE profile SET validated='true' WHERE validated=?"))
-{
-    $stmt->bind_param('i',$_GET['token']);
-    $stmt->execute();
-    $stmt->close();
-}
-$db->close();
-header('Location: saved.php');
+$token = $_GET['token'];
+
+$q = "UPDATE `profile` SET validated=1 WHERE token ='$token'";
+$result = mysql_query($q);
+header('Location: dashboard.php');
 ?>

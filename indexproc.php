@@ -5,7 +5,7 @@ require_once('class.phpmailer.php');
 $flag = strpos($_POST['email'],'@');
 if (!($flag === false))
     die('<font color="red">Only enter your username (not full email address)</font>');
-$to = $_POST['email'] . '@wartburg.edu';
+$to = $_POST['email'] . Settings::$validEmailDomain;
 $emailFrags = explode('.',$_POST['email']);
 $first = ucfirst($emailFrags[0]);
 $last = ucfirst($emailFrags[1]);

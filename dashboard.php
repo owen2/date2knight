@@ -19,10 +19,23 @@ if (isset($_REQUEST['isNewUser']) and isset($_REQUEST['email']) and isset($_REQU
         $last = $last[0];
         $email = $_REQUEST['email'];
         $hash = md5($_REQUEST['password']);
-        $q = "INSERT INTO `lovematch`.`profile` (`id`, `firstname`, `lastname`, `box`, `phone`, `email`, `password`, `gender`, `seeks`, `paid`, `bio`, `validated`) VALUES (NULL, '$first', '$last', NULL, NULL, '$email', '$hash', NULL, NULL, NULL, NULL, NULL);";
+        $token = md5(microtime() . $_POST['email']);
+        $q = "INSERT INTO `lovematch`.`profile` (`id`, `firstname`, `lastname`, `box`, `phone`, `email`, `password`, `gender`, `seeks`, `paid`, `bio`, `validated`,`token`) VALUES (NULL, '$first', '$last', NULL, NULL, '$email', '$hash', NULL, NULL, NULL, NULL, NULL,'$token');";
         $result = mysql_query($q);
         if ($result)
-            die("Profile Created");
+        {
+            $to      = "$first $last <$email>";
+            $subject = Settings::$name.' Profile Created';
+            $message = "Hi $first $last,\r\n\r\nYou (or someone pretending to be you) just set up a profile at ".Settings::$name."\r\n\r\n"
+                       ."In order to make sure this was really you, please verify your account here:\r\n\r\n"
+                       .Settings::$baseurl."validate.php?token=".$token."\r\n\r\n"
+                       ."If you did not sign up for an account, just ignore this, and the profile will not be seen or used and you will not recieve any more mail.\r\n\r\n"
+                       ."See you soon,\r\nYour friendly ".Settings::$organization." date-matching robot";
+            $headers = 'From: '.Settings::$envelopefrom.' <'.$mailfrom.'>' . "\r\n" .
+                        'X-Mailer: PHP/'.Settings::$name;
+
+            mail($to, $subject, $message, $headers);
+        }
         else
             die(mysql_error());
     }
@@ -42,8 +55,7 @@ if (isset($_REQUEST['email']) and isset($_REQUEST['password']))
     }
     else
     {
-        //include("user-login.php");
-        die(mysql_error());
+        include("user-login.php");
     }
     if ($email == $profile['email'] and md5($_REQUEST['password']) == $profile['password'])
     {
@@ -51,11 +63,7 @@ if (isset($_REQUEST['email']) and isset($_REQUEST['password']))
     }
     else
     {
-        //include("user-login.php");
-        echo(md5($password));
-        echo("<br>");
-        echo($profile['password']);
-        die(mysql_error());
+        include("user-login.php");
     }
 
 }
@@ -75,7 +83,7 @@ $paid = $profile['paid'];
 
 function hasTakenQuiz()
 {
-    return true;
+    return false;
 }
 
 function showMatches($limit)
@@ -115,7 +123,7 @@ function showQuiz()
                 <?php echo($bio); ?>
             <br style="clear:both">
             <hr>
-        <?php if ($valid != "true")
+        <?php if ($valid == null)
         { 
         ?><h2 class="error">Identity Validation Pending</h2><p>Your profile won't be seen by others until you validate your email address. All you need to do is follow the link we sent you. This keeps people from pretending to be you.</p><?php
         }
