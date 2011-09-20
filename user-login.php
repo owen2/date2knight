@@ -41,8 +41,10 @@
                             <td><input type="submit" id="submit" value="sign me up!" /></td>
                         </tr>
                         <input type="hidden" name="isNewUser" value="true" />
+                    </table>
                 </form>
             </div>
         </div>
+        <div>Powered by <a href="http://gitub.com/WartburgComputerClub/date2knight">Date 2 Knight</a> :: <a href="http://wartburg.edu">Wartburg College</a> <a href="http://mcsp.wartburg.edu">Computer Club</a></div>
     <body>
 </html>
