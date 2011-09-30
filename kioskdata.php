@@ -31,9 +31,9 @@ $sortSql = "order by $sortname $sortorder";
 $searchSql = ($qtype != '' && $query != '') ? "where $qtype = '$query'" : '';
 
 if (strlen($searchSql) == 0)
-    $searchSql = "where validated='true'";
+    $searchSql = "where validated='1'";
 else
-    $searchSql .= " AND validated='true'";
+    $searchSql .= " AND validated='1'";
 $sql = "SELECT COUNT(*) from profile $searchSql";
 
 $result = mysql_query($sql);
@@ -47,7 +47,7 @@ $data["page"] = $page;
 $data["total"] = $total;
 $data["rows"] = array();
 
-$sql = "SELECT paid,box,firstname,lastname,id FROM `profile` $searchSql $sortSql $limitSql";
+$sql = "SELECT * FROM `profile` $searchSql $sortSql $limitSql";
 $result = mysql_query($sql);
 while($row = mysql_fetch_assoc($result))
 {
