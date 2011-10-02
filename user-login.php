@@ -45,6 +45,6 @@
                 </form>
             </div>
         </div>
-        <div>Powered by <a href="http://gitub.com/WartburgComputerClub/date2knight">Date 2 Knight</a> :: <a href="http://wartburg.edu">Wartburg College</a> <a href="http://mcsp.wartburg.edu">Computer Club</a></div>
+        <div class="fixed-corner">Powered by <a href="http://gitub.com/WartburgComputerClub/date2knight">Date 2 Knight</a> :: <a href="http://wartburg.edu">Wartburg College</a> <a href="http://mcsp.wartburg.edu">Computer Club</a></div>
     <body>
 </html>

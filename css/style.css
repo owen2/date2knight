@@ -145,3 +145,10 @@ body
 .error {
 	color:red;
 }
+
+.fixed-corner
+{
+    position: fixed;
+    left:0;
+    bottom:0;
+}
