@@ -1,4 +1,3 @@
-<?php require_once("auth.php");?>
 <!doctype html>
 <html>
 <head>
