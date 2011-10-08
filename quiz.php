@@ -1,7 +1,13 @@
 <?php error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
+// Dear everyone, please clean up my code, it is aweful.
+
+
+
 require_once("config.php");
+require_once("quizlib.php");
+
 if (!Settings::isPollOpen())
 {
     die("The quiz isn't open, but you should come back on ". Settings::$pollMonthOpen."/".Settings::$pollDayOpen);
@@ -119,27 +125,12 @@ if (isset($_SESSION['instant']))
             <h1>Date2Knight Survey</h1>
             <form id="quiz" action="capturedata.php" method="post" >
             <input type="hidden" name="token" value="<?php echo($_GET['token']);?>" />
-            <table width=100%>
-    <?php
-    if ($stmt->prepare("SELECT `id`,`text`,`lefttext`,`righttext` FROM `question` WHERE `enable`=1 ORDER BY rand();"))
-    {
-	$stmt->execute();
-	$stmt->bind_result($id,$text,$lefttext,$righttext);
-	while($stmt->fetch())
-	{
-	    ?>
-	               <tr><td colspan="3" class="question"><?php echo($text);?></td></tr><?php ?>
-		<tr><td class="centered"><?php echo($lefttext);?></td><td><input id="<?php echo($id);?>" name="question_<?php echo($id);?>" type="range" class="slider" min="0" max="10" value="5"/></td><td class="centered"><?php echo($righttext);?></td></tr>
-                    <tr><td colspan="3"><hr></td></tr>
-											    
-		    <?php
-       }
-	$stmt->close();
-    }
-    $db->close();
-    ?>
-
-		    </table>
+            
+            <?php  
+            
+            quizTable(); 
+            
+            function contactTable(){ ?>
 		    <table class="padded content">
                 <tr>
                     <th colspan=2>Contact Info</th>
@@ -179,15 +170,13 @@ if (isset($_SESSION['instant']))
 		        <tr>
 		            <th>Say something nice about yourself:</th>
 		        </tr>
-		    </table>
+		    </table><?php } contactTable(); ?>
 			<textarea id="elm1" name="bio" rows="15" cols="80" style="width: 80%"></textarea>
 
 		    <input class="hugebutton" type="submit" value="Next &raquo;"></input>
 		    <input type="submit" id="hiddenSubmit" style="display: none;" />
 		    </form>
-		    <script>
-            $(":range").rangeinput();
-            </script>
+
             <br>
 	    </div>
     </body>

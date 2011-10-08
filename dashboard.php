@@ -2,6 +2,7 @@
 
 require_once("config.php");
 require_once("connect.php");
+require_once("quizlib.php");
 
 if (!isset($_SESSION))
     session_start();
@@ -91,7 +92,7 @@ $paid = $profile['paid'];
 <head>
     <link rel="stylesheet" href="css/style.css" media="screen" />
     <link rel="stylesheet" href="css/print.css" media="print" />
-    <script type="text/javascript" src="js/jquery-1.6.3.min.js"></script>
+    <script src="http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js"></script>  
 </head>
 <body>
     <div class="padded bodywrap">

@@ -3,8 +3,12 @@
 if (Settings::isPollOpen())
 {
     ?><h2>Take the survey</h2>
-    <p>TODO: Move Quiz Code to this dashlet (dashlets/quiz.php)</p>
-    <?php
+    <form id="quiz" action="capturedata.php" method="post" >
+    <?php 
+    quizTable();
+    ?>
+    <input type="submit" class="hugebutton" value="Save Answers" >
+    </form>    <?php
 }
 else
 {
