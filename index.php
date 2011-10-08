@@ -1,33 +1,50 @@
 <?php require_once("config.php"); ?>
-<!doctype html>
+<!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="css/style.css"/>
-	<link rel="stylesheet" href="css/validationEngine.jquery.css" type="text/css" />
-	<script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
-	<script type="text/javascript" src="js/jquery.validationEngine-en.js" charset="utf-8"></script>
-	<script type="text/javascript" src="js/jquery.validationEngine.js" charset="utf-8"></script>
-
-        <script type="text/javascript" src="js/index.js"></script>
+        <link rel="stylesheet" href="css/style.css" media="screen">
     </head>
     <body>
-        <div class="padded bodywrap">
-            <h1>Welcome to <?php echo(Settings::$name); ?>!</h1>
-            <p>A service from the <?php echo(Settings::$organization); ?> to help you find a Valentine (or a new friend)</p>
-            <div class="content">
-                <h2>Here's how it works:</h2>
-                    <p><b>1:</b> Enter your wartburg username.</p>
-		    <p><b>2:</b> Go to your wartburg email for a link to the quiz.</p>
-                    <p><b>3:</b> Order your top matches.</p>
-                    <p><b>4:</b> Check your email.</p>
-                <h2>Ready to try?</h2>
-                    <p>Tell us your email address:</p>
-                    <form id="form" name="login">
-                        <input name="email" id="email" class="validate[required]" type="email" placeholder="first.last" required="required" />@wartburg.edu
-                        <input type="submit" id="submit" value="Submit"/>
-                    </form>
-		    <div id="loading"></div>
+        <div class="bodywrap">
+            <div class="stackright login-container">
+                <form action="dashboard.php" method="post">
+                    login: <input name="email" type="email" required="required" placeholder="first.last@<?php echo(Settings::$validEmailDomain); ?>" /> <input name="password" type="password" required="required" placeholder="password"/> <input type="submit" value="go" />
+                </form>
+            </div>
+            <br style="clear:both">
+
+            <div class="padded content">
+                <h1><?php echo(Settings::$name); ?></h1>
+                <p>A service from the <?php echo(Settings::$organization); ?> to help you find a date (or a friend).</p>
+                <h2>How it works:</h2>
+                <ol>
+                    <li>You answer some questions about yourself.</li>
+                    <li>We add you to our magic database so that others can get matched to you.</li>
+                    <li>If you make a small donation to the <?php echo(Settings::$organization); ?>, our monkeys and robots make a list of people you would get along with on a date or as buddies.</li>
+                </ol>
+                <form id="form" name="login" action="dashboard.php" method="post">
+                    <table class="register-container">
+                        <tr>
+                            <td>Email Address</td>
+                            <td><input name="email" id="email" type="email" required="required" class="register-container register-field" value="@<?php echo(Settings::$validEmailDomain); ?>" /></td>
+                        </tr>
+                        <tr>
+                            <td>Choose a Password</td>
+                            <td><input type="password" name="password" required="required" class="register-field" /></td>
+                        </tr>
+                        <tr>
+                            <td>Confirm Password</td>
+                            <td><input type="password" name="password-check" required="required" class="register-field" /></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="submit" id="submit" value="sign me up!" /></td>
+                        </tr>
+                        <input type="hidden" name="isNewUser" value="true" />
+                    </table>
+                </form>
             </div>
         </div>
-    </body>
+        <div class="fixed-corner">Powered by <a href="http://gitub.com/WartburgComputerClub/date2knight">Date 2 Knight</a> :: <a href="http://wartburg.edu">Wartburg College</a> <a href="http://mcsp.wartburg.edu">Computer Club</a></div>
+    <body>
 </html>
