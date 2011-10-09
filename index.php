@@ -22,6 +22,7 @@
                     <li>We add you to our magic database so that others can get matched to you.</li>
                     <li>If you make a small donation to the <?php echo(Settings::$organization); ?>, our monkeys and robots make a list of people you would get along with on a date or as buddies.</li>
                 </ol>
+                <h2>Create an account:</h2>
                 <form id="form" name="login" action="dashboard.php" method="post">
                     <table class="register-container">
                         <tr>
