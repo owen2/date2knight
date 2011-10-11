@@ -64,7 +64,7 @@ if (isset($_REQUEST['email']) and isset($_REQUEST['password']))
     }
     else
     {
-        header("location: user-login.php");
+        header("location: /");
     }
 
 }
@@ -72,7 +72,7 @@ if (isset($_REQUEST['email']) and isset($_REQUEST['password']))
 //If not authenticated, bail!
 if (!isset($_SESSION['id']))
 {
-    header('location: user-login.php');
+    header('location: /');
 }
 
 $q = "SELECT * FROM `profile` WHERE `id` = ".$_SESSION['id'];
