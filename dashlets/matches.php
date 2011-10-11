@@ -1,10 +1,13 @@
 <h2>Matches</h2><?php
 if (!$paid)
 {
-    ?><p>To see your matches, please donate $1 to a <?php echo(Settings::$organization);?> representative.</p><?php
+    ?><p>To see your matches, please donate $2 to a <?php echo(Settings::$organization);?> representative.</p><?php
 }
 elseif ($paid)
 {
-    ?>TODO: Use report.php's logic to make some pretty match display here.<?php
+    require_once("reportlib.php");
+    $dates = getTopDates($_SESSION['id']);    
+    foreach ($dates as $id => $score)
+        showMiniProfile($id, $score, "&hearts;");
 }
-?>
+?><br class="reset-float">

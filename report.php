@@ -9,9 +9,8 @@ require_once("connect.php");
 //$first = $row['firstname'];
 //$last = $row['lastname'];
 //$box = $row['box'];
-//////////////////////
 function canDoIt($a, $b)
-{/////////////////////////////
+{   
     $resultA = mysql_query("SELECT gender,seeks FROM profile WHERE id=$a");
     $resultB = mysql_query("SELECT gender,seeks FROM profile WHERE id=$b");
     $rowA = mysql_fetch_assoc($resultA);

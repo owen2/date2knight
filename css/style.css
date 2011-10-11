@@ -61,6 +61,16 @@ body
     float: right;
 }
 
+.stackleft
+{
+    float: left;
+}
+
+.reset-float
+{
+    clear: both;
+}
+
 .login-container
 {
     border-bottom-left-radius: 20px;
@@ -151,4 +161,18 @@ body
     position: fixed;
     left:0;
     bottom:0;
+}
+
+.mini-profile
+{
+    border: 2px solid #888;
+    border-radius: 20px;
+    margin: 5px;
+    padding-right: 10px;
+}
+
+.mp-avatar
+{
+    border-top-left-radius: 18px; 
+    margin-right: 20px;
 }
