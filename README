@@ -1,19 +1,23 @@
-# Date 2 Knight Verson 2011
+# Date 2 Knight
 
-Looks like you've already installed the package. Now go make sure that you have the right stuff in the scripts/dbauth.php
+Date2Knight is an open-source matchmaking web application. It was originally created for the Wartburg Computer Club's fundraising activities. It works by comparing similarities between people based on a survey. If you are the curious math type, the algorithm is a n-dimension euclidean distance, the very same used by commercial dating sites. 
 
-Now you should probably take the quiz for yourself to make sure everything is working.
-
-Then checkout the admin page at kiosk.php. Someone should know the super secret password, it's the old name of the club.
-
-If you can see your own results in there, everything is in order. 
-
-You might want to change the email message's names in the markpaid.php.
+Feel free to fork, but please attribute.  :]
 
 Original Version by: Owen Johnson in 2011
+
+Math Parts by: Josh Osbeck
+
+Idea to do a dating service: Dr. Zelle
+
+Analysis of eHarmony Questions: Dr. Letsche
+
 Contributors:
 Owen Johnson
+Heath Rost
 Matt Phillips
 Andrew Reisner
+Jacob Hinrichsen
+Nathan Stumme
 
 (add your name if you contributed)

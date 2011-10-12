@@ -12,7 +12,8 @@ if(isset($_SESSION['key']))
     if ($_SESSION['key'] == Settings::$adminpass)
         return true;
     else
-        header("location: login.php");
+        include("admin-login.php");
+        die();
 }
 elseif (Settings::$adminpass==$_REQUEST['pass'])
 {
@@ -21,7 +22,8 @@ elseif (Settings::$adminpass==$_REQUEST['pass'])
 }
 else
 {
-    header("location: login.php");
+    include("admin-login.php");
+    die();
 }   
 
 ?>
