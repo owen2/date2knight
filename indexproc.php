@@ -5,7 +5,7 @@ require_once('class.phpmailer.php');
 $flag = strpos($_POST['email'],'@');
 if (!($flag === false))
     die('<font color="red">Only enter your username (not full email address)</font>');
-$to = $_POST['email'] . '@wartburg.edu';
+$to = $_POST['email'] . Settings::$validEmailDomain;
 $emailFrags = explode('.',$_POST['email']);
 $first = ucfirst($emailFrags[0]);
 $last = ucfirst($emailFrags[1]);
@@ -28,7 +28,7 @@ if ($stmt->prepare("INSERT INTO `queue` (`username`,`token`) VALUES (?,?)"))
 }
 $db->close();
 $mail = new PHPMailer();
-$link = Settings::$baseurl .'date2knight/quiz.php?token=' . $token;
+$link = Settings::$baseurl .'quiz.php?token=' . $token;
 $body = "Hi $first $last!\r\n";
 $body .= "The " . Date('Y') . " edition of Wartburg's is ready and waiting for you as requested.\r\n";
 $body .= "Click on the following link to get started. \r\n" . $link . "\r\n\r\nThank you!\r\nWartburg Computer Club\r\n";
@@ -41,7 +41,7 @@ $mail->Host = "smtp.gmail.com";
 $mail->Port = 465;
 $mail->Username = "date2knight@gmail.com";
 $mail->Password = "datepass";
-$mail->SetFrom("date2knight@gmail.com","Match Maker");
+$mail->SetFrom("date2knight@gmail.com",Settings::$envelopeFrom);
 $mail->Subject = "Pending Quiz";
 $mail->Body = $body;
 $mail->AddAddress($to,$toName);
@@ -49,7 +49,7 @@ $mail->AddAddress($to,$toName);
 if(!$mail->Send()) {
     echo "<font color=\"red\">Mailer Error: " . $mail->ErrorInfo . '</font>';
 } else {
-  echo "<font color=\"green\">Message has been sent</font>";
+  echo "<font color=\"green\">We sent you a message with a link to the quiz! Thanks for signing up.</font>";
 }
 
 ?>

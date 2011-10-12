@@ -48,12 +48,13 @@ require_once("auth.php");
                     echo("<tr>");
                     echo("<td>". $row['name'] ."</td>");
                     echo("<td>");
-                    if ($row['paid'] == "paid"){echo('<a href="report.php?id='. $row['id'] .'">get report</a></td><td>');}else{echo('</td><td><a href="markpaid.php?id='. $row['id'] .'">mark as paid</a>');}
+                    if ($row['paid'] == "paid"){e
+cho('<a href="report.php?id='. $row['id'] .'">get report</a></td><td>');}else{echo('</td><td><a href="markpaid.php?id='. $row['id'] .'">mark as paid</a>');}
                     echo("</td>");
                     echo("</tr>");
                 }*/
 	     ?></table>
-	     <br><a href="stats.php">[stats]</a> <a href="report-all.php">[get all reports]</a> <a href="killsession.php">[logout]</a><br><br><?php
+	     <br><a href="stats.php">[stats]</a> <a href="report-all.php">[get all reports]</a><a href="questions.php">[Questions]</a><a href="killsession.php">[logout]</a><br><br><?php
 			    ?>
         </div>
         <a href="cleardb.php?really=yes" style="font-size: xx-small">clear database? only click if you really mean it.</a><br>

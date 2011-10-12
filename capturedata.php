@@ -1,7 +1,8 @@
 <?php error_reporting(E_ALL);
 ini_set('display_errors', '1');
 include('functions.php');    
-
+include("connect.php");
+/* This logic moved to update-profile.php and dashboard.php
 $paid = 0;
 $seeks = 0;
 if (isset($_REQUEST['seeksmale']) && $_REQUEST['seeksmale'] == 'on')
@@ -38,9 +39,9 @@ if ($stmt->prepare("SELECT `id` FROM `profile` WHERE `email`=?"))
 }
 if ($id == 'flag') // New user profile
 {
-    if ($stmt->prepare("INSERT INTO `profile` (`firstname`,`lastname`,`box`,`phone`,`email`,`gender`,`seeks`,`paid`) VALUES(?,?,?,?,?,?,?,?)"))
+    if ($stmt->prepare("INSERT INTO `profile` (`firstname`,`lastname`,`box`,`phone`,`email`,`gender`,`seeks`,`paid`,`bio`,`validated`) VALUES(?,?,?,?,?,?,?,?,?,'true')"))
     {
-	$stmt->bind_param('ssissiii',$firstname,$lastname,$_REQUEST['box'],$_REQUEST['phone'],$_REQUEST['email'],$gender,$seeks,$paid);
+	$stmt->bind_param('ssissiiis',$firstname,$lastname,$_REQUEST['box'],$_REQUEST['phone'],$_REQUEST['email'],$gender,$seeks,$paid,$_REQUEST['bio']);
 	$stmt->execute();
 	if ($stmt->insert_id < 0){
 	    $stmt->close();
@@ -51,22 +52,50 @@ if ($id == 'flag') // New user profile
     }
 }else
 {
-    if ($stmt->prepare("UPDATE `profile` SET `firstname`=?,`lastname`=?,`box`=?,`phone`=?,`gender`=?,`seeks`=?,`paid`=? WHERE `id`=?"))
+    if ($stmt->prepare("UPDATE `profile` SET `firstname`=?,`lastname`=?,`box`=?,`phone`=?,`gender`=?,`seeks`=?,`paid`=?,`bio`=? WHERE `id`=?"))
     {
-	$stmt->bind_param('ssisiiii',$firstname,$lastname,$_REQUEST['box'],$_REQUEST['phone'],$gender,$seeks,$paid,$id);
+	$stmt->bind_param('ssisiiisi',$firstname,$lastname,$_REQUEST['box'],$_REQUEST['phone'],$gender,$seeks,$paid,$_REQUEST['bio'],$id);
 	$stmt->execute();
 
     }
 
 
 }
+*/
+
+if (!isset($_SESSION))
+    session_start();
+    
+$id = $_SESSION['id'];
+
 // First delete previous answers if any
-if ($stmt->prepare("DELETE FROM `response` WHERE `profile_id`=?"))
-{
-    $stmt->bind_param('i',$id);
-    $stmt->execute();
-}
+$q = "DELETE FROM `response` WHERE `profile_id`= " . $_SESSION['id'];
+$result = mysql_query($q);
+if(!$result)
+    die(mysql_error());
 // insert question answers
+
+foreach($_REQUEST as $key => $value)
+{
+	$pos = strpos($key,'question_');
+	
+	if($pos === false) 
+	    continue;
+	else 
+	{
+	    $questionFrag = explode('_',$key);
+	    $question = intval($questionFrag[1]);
+	    $answer = intval($value);
+	    $q = "INSERT INTO `response` (`profile_id`,`question_id`,`answer`) VALUES ($id,$question,$answer)";
+	    $result= mysql_query($q);
+	    if(!$result)
+            die(mysql_error());
+	}
+}
+	
+header("location: dashboard.php");
+	
+/*
 if ($stmt->prepare("INSERT INTO `response` (`profile_id`,`question_id`,`answer`) VALUES (?,?,?)"))
 {
     $stmt->bind_param('iii',$id,$question,$answer);
@@ -89,5 +118,5 @@ if ($stmt->prepare("INSERT INTO `response` (`profile_id`,`question_id`,`answer`)
     header("Location: saved.php");
 
 }
-$db->close(); // Just in case
+$db->close(); // Just in case */
 ?>
