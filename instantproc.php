@@ -1,55 +1,78 @@
 <?php
-require_once("functions.php");
+
+require_once("config.php");
+require_once("connect.php");
+require_once("quizlib.php");
+
 if (!isset($_SESSION))
-   session_start();
-$flag = strpos($_POST['email'],'@');
-if (!($flag === false))
-    die('<div style="color: red">Only enter your username (not full email address)</div>');
-$to = $_POST['email'] . Settings::$validEmailDomain;
-$emailFrags = explode('.',$_POST['email']);
-$first = ucfirst($emailFrags[0]);
-$last = ucfirst($emailFrags[1]);
-$toName = $first . ' ' . $last;
-$token = md5(microtime() . $_POST['email']);
-$db = db_connect();
-$stmt = $db->stmt_init();
-// Check if there is already a profile for this user
+    session_start();
 
-if ($stmt->prepare("SELECT id FROM `profile` WHERE `email`=?"))
+// If new user signing up
+if (isset($_REQUEST['isNewUser']) and isset($_REQUEST['email']) and isset($_REQUEST['password']) and isset($_REQUEST['password-check']) and ($_REQUEST['password'] == $_REQUEST['password-check']))
 {
-    $stmt->bind_param('s',$to);
-    $stmt->execute();
-    $stmt->store_result();
-    if ($stmt->num_rows > 0)
+    //Check to see if there is a * valid * user already
+    $q = "SELECT * FROM `profile WHERE `email` = '".$_REQUEST['email']."' and `validated` <> null";
+    $result = mysql_query($q);
+    if(!$result)
     {
-	$stmt->free_result();
-	$stmt->close();
-	$db->close();
-	echo '<div style="color: green">';
-	echo("We already have a profile for you.");
-	echo " You can go to </a href=\"" . Settings::$baseurl. "\">".Settings::$baseurl."</a>";
-	echo " to retake the quiz if you wish.";
-	echo '</div>';
-	die();
-    }
-}
-$sql = "INSERT INTO profile (firstname,lastname,email,validated) VALUES (?,?,?,?)";
-if ($stmt->prepare($sql))
-{
-    $stmt->bind_param('ssss',$first,$last,$to,$token);
-    $stmt->execute();
-    $stmt->close();
-}
-$db->close();
-$link = Settings::$baseurl .'validate.php?token=' . $token;
-$body = "Hi $first $last!\r\n";
-$body .= "Your responses must be validated!\r\n";
-$body .= "Click on the following link to validate your responses. \r\n" . $link . "\r\n\r\nThank you!\r\nWartburg Computer Club\r\n";
+        $emailFrags = explode('.',$_REQUEST['email']);
+        $first = ucfirst($emailFrags[0]);
+        $last = explode("@",ucfirst($emailFrags[1]));
+        $last = $last[0];
+        $email = $_REQUEST['email'];
+        $hash = md5($_REQUEST['password']);
+        $token = md5(microtime() . $_POST['email']);
+        $q = "INSERT INTO `lovematch`.`profile` (`id`, `firstname`, `lastname`, `box`, `phone`, `email`, `password`, `gender`, `seeks`, `paid`, `bio`, `validated`,`token`) VALUES (NULL, '$first', '$last', NULL, NULL, '$email', '$hash', NULL, NULL, NULL, NULL, NULL,'$token');";
+        $result = mysql_query($q);
+        if ($result)
+        {
+            $to      = "$first $last <$email>";
+            $subject = Settings::$name.' Profile Created';
+            $message = "Hi $first $last,\r\n\r\nYou (or someone pretending to be you) just set up a profile at ".Settings::$name."\r\n\r\n"
+                       ."In order to make sure this was really you, please verify your account here:\r\n\r\n"
+                       .Settings::$baseurl."validate.php?token=$token\r\n\r\n"
+                       ."If you did not sign up for an account, just ignore this, and the profile will not be seen or used and you will not recieve any more mail.\r\n\r\n"
+                       ."See you soon,\r\nYour friendly ".Settings::$organization." date-matching robot";
+            $headers = 'From: '.Settings::$envelopefrom.' <'.Settings::$mailfrom.'>' . "\r\n" .
+                        'X-Mailer: PHP/'.Settings::$name;
 
-$headers = "From: date2knight@gmail.com";
-mail($to,"Validation Required",$body,$headers);
-$_SESSION['instant'] = $token;
+            mail($to, $subject, $message, $headers);
+        }
+        else
+            die(mysql_error());
+    }
+    
+}
+
+// If this is first login, store session variable
+if (isset($_REQUEST['email']) and isset($_REQUEST['password']))
+{
+    $email = $_REQUEST['email'];
+    $q = "SELECT * FROM `profile` WHERE `email` = '$email'";
+    $result = mysql_query($q);
+    if ($result)
+    {
+        $profile = mysql_fetch_array($result);
+        //echo($profile);
+    }
+    else
+    {
+        header("location: index.php");
+    }
+    if ($email == $profile['email'] and md5($_REQUEST['password']) == $profile['password'])
+    {
+        $_SESSION['id'] = $profile['id'];
+    }
+    else
+    {
+        header("location: /");
+    }
+
+}
+
+//If not authenticated, bail!
+if (!isset($_SESSION['id']))
+    header('location: /');
+
+header('location: quiz.php');
 ?>
-<script type="text/javascript">
-document.location = 'quiz.php';
-</script>

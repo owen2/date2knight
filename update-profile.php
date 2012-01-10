@@ -6,7 +6,7 @@
         session_start();
         
     if (!isset($_SESSION['id']))
-        header("location: user-login.php");
+        header("location: index.php");
         
     $box = $_REQUEST['box'];
     $phone = $_REQUEST['phone'];
@@ -23,7 +23,7 @@
     }
     else
     {
-        header("location: dashboard.php");
-        //echo("Success!");
+        if(!isset($_REQUEST['instant']))
+        	header("location: dashboard.php");
     }
 ?>

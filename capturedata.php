@@ -92,8 +92,15 @@ foreach($_REQUEST as $key => $value)
             die(mysql_error());
 	}
 }
-	
-header("location: dashboard.php");
+if(isset($_REQUEST['instant']))
+{
+	include("update-profile.php");
+	header("location: saved.php");
+}
+else
+{
+	header("location: dashboard.php");
+}
 	
 /*
 if ($stmt->prepare("INSERT INTO `response` (`profile_id`,`question_id`,`answer`) VALUES (?,?,?)"))
