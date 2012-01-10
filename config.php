@@ -11,7 +11,7 @@ require_once("defaults.php");
 //DBAuth::$db = 'lovematch';
 
 
-//Settings::$name = "Date2Knight DEV";
+Settings::$name = "Date2Knight (Owen's DEV Edition)";
 //Settings::$organization = "Wartburg Computer Club";
 //Settings::$adminpass = "missingbytes";
 //Settings::$baseurl = "http://date2knight.com/";
@@ -21,9 +21,9 @@ require_once("defaults.php");
 //Settings::$validEmailDomain = "wartburg.edu";
 //Settings::$DEBUG_ALLOW_ANY_EMAIL = false;
     
-//Settings::$pollMonthOpen = 2;
-//Settings::$pollMonthClose = 2;
-//Settings::$pollDayOpen = 1; // first day inclusive
-//Settings::$pollDayClose = 13; // last day inclusive
+Settings::$pollMonthOpen = 1;
+Settings::$pollMonthClose = 12;
+Settings::$pollDayOpen = 1; // first day inclusive
+Settings::$pollDayClose = 31; // last day inclusive
     
 ?>
