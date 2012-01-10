@@ -28,7 +28,7 @@ class Settings
     public static $pollMonthOpen = 2;
     public static $pollMonthClose = 2;
     public static $pollDayOpen = 1; // first day inclusive
-    public static $pollDayClose = 13; // last day inclusive
+    public static $pollDayClose = 14; // last day inclusive
     
     public static function isPollOpen()
     {

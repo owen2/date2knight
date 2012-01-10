@@ -1,10 +1,6 @@
 <?php error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-// Dear everyone, please clean up my code, it is aweful.
-
-
-
 require_once("config.php");
 require_once("quizlib.php");
 
@@ -16,48 +12,18 @@ if (!Settings::isPollOpen())
 include("functions.php");
 if (!isset($_SESSION))
    session_start();
-$name = "Test User";
-$email = "spam@colorfullimo.com";
 
-$db = db_connect();
-$stmt = $db->stmt_init();
-if (isset($_SESSION['instant']))
-{
-    if ($stmt->prepare("SELECT firstname,lastname,email FROM profile WHERE validated=?"))
-    {
-	$stmt->bind_param('s',$_SESSION['instant']);
-	$stmt->execute();
-	$stmt->store_result();
-	$stmt->bind_result($firstname,$lastname,$email);
-	$token = $_SESSION['instant'];
-	if ($stmt->num_rows < 1)
-	{
-	    die('<font color="red">Your unique code [' . $token . '] was not found. Please try again.</font>');
-	}
-	$stmt->fetch();
-	$stmt->free_result();
-	$name = $firstname . ' ' . $lastname;
-    }
-}else
-{
-    if ($stmt->prepare("SELECT `username` FROM `queue` WHERE `token`=?"))
-    {
-	$stmt->bind_param('s',$_GET['token']);
-	$stmt->execute();
-	$stmt->store_result();
-	$stmt->bind_result($username);
-	if ($stmt->num_rows < 1)
-	{
-	    die('<font color="red">Your unique code was not found. Please try again.</font>');
-	}
-	$stmt->fetch();
-	$stmt->free_result();
-	$email = $username . '@wartburg.edu';
-	$nameFrag = explode('.',$username);
-	$name = ucfirst($nameFrag[0]) . ' ' . ucfirst($nameFrag[1]);
-	
-    }
-}
+$q = "SELECT * FROM `profile` WHERE `id` = ".$_SESSION['id'];
+$result = mysql_query($q);
+$profile = mysql_fetch_array($result);
+
+$firstName = $profile['firstname'];
+$lastName = $profile['lastname'];
+$email = $profile['email'];
+$bio = $profile['bio'];
+$profileImage = "http://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?r=x&d=404";
+$valid = $profile['validated'];
+$paid = $profile['paid'];
 ?>
 
 <!doctype html>
@@ -124,7 +90,6 @@ if (isset($_SESSION['instant']))
             <br>
             <h1>Date2Knight Survey</h1>
             <form id="quiz" action="capturedata.php" method="post" >
-            <input type="hidden" name="token" value="<?php echo($_GET['token']);?>" />
             
             <?php  
             
@@ -136,11 +101,11 @@ if (isset($_SESSION['instant']))
                     <th colspan=2>Contact Info</th>
                 </tr>
                 <tr>
-                    <td> Full Name:</td><td><?php echo($name);?><input type="hidden" name="name" value="<?php echo($name); ?>"/></td>
+                    <td> Full Name:</td><td><?php echo("$firstName $lastName");?></td>
                 </tr>
                 <tr>
                     <td>Email Address:</td>
-                    <td> <?php echo($email);?><input type="hidden" name="email" value="<?php echo($email); ?>"/></td>                
+                    <td><?php echo($email);?></td>                
                 </tr>
                 <tr>
                     <td>Send my results to box:</td>
@@ -155,26 +120,36 @@ if (isset($_SESSION['instant']))
                     <th colspan="2">Sexual Orientation</th>
                 </tr>
                 <tr>
-                    <td>Are you female or male?</td>
-                    <td><input type="radio" name="gender" value="f"/>Female<input type="radio" name="gender" value="m"/>Male</td>
+                    <td>I am a </td>
+                    <td>
+                    	<select name="gender">  
+                			<option value ="2" >Man</option>  
+                			<option value ="1" selected="true">Woman<option>
+            			</select>
+            		</td>
                 </tr>
                 <tr>
-                    <td>Interested in men?</td><td><input type="checkbox" name="seeksmale"/>Match me with men. </td>
-                </tr>
-                <tr>
-                    <td>Interested in women?</td><td><input type="checkbox" name="seeksfemale" />Match me with women.</td>
-                </tr>
-                <tr>
-                    <td>Not looking for dates?</td><td><input id="friend" type="checkbox" name="seeksfriend" />Exclude me from love matches, I only want friend matches.</td>
+                    <td>I'm interested in</td>
+                    <td>
+                    	<select name="seeks"> 
+                			<option value ="0" selected="true">Friends Only</option> 
+                			<option value ="2" >a Man</option>  
+                			<option value ="1" >a Woman</option>  
+                			<option value ="3" >a Man or a Woman</option>  
+            			</select>
+					</td>
                 </tr>
 		        <tr>
 		            <th>Say something nice about yourself:</th>
 		        </tr>
+		        
+		                  		        
+		        
 		    </table><?php } contactTable(); ?>
 			<textarea id="elm1" name="bio" rows="15" cols="80" style="width: 80%"></textarea>
-
-		    <input class="hugebutton" type="submit" value="Next &raquo;"></input>
+		    <input class="hugebutton" type="submit" value="Next &raquo;" />
 		    <input type="submit" id="hiddenSubmit" style="display: none;" />
+		    <input type="hidden" name="instant" value="yes" />
 		    </form>
 
             <br>

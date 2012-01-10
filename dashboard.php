@@ -12,7 +12,9 @@ if (isset($_REQUEST['isNewUser']) and isset($_REQUEST['email']) and isset($_REQU
 {
     //Check to see if there is a * valid * user already
     $q = "SELECT * FROM `profile WHERE `email` = '".$_REQUEST['email']."'";
-    if(!($result = mysql_query($q)))
+    $q = "SELECT * FROM `profile WHERE `email` = '".$_REQUEST['email']."' and `validated` <> null";
+    $result = mysql_query($q);
+    if(!$result)
     {
         $emailFrags = explode('.',$_REQUEST['email']);
         $first = ucfirst($emailFrags[0]);
@@ -29,10 +31,10 @@ if (isset($_REQUEST['isNewUser']) and isset($_REQUEST['email']) and isset($_REQU
             $subject = Settings::$name.' Profile Created';
             $message = "Hi $first $last,\r\n\r\nYou (or someone pretending to be you) just set up a profile at ".Settings::$name."\r\n\r\n"
                        ."In order to make sure this was really you, please verify your account here:\r\n\r\n"
-                       .Settings::$baseurl."validate.php?token=".$token."\r\n\r\n"
+                       .Settings::$baseurl."validate.php?token=$token\r\n\r\n"
                        ."If you did not sign up for an account, just ignore this, and the profile will not be seen or used and you will not recieve any more mail.\r\n\r\n"
                        ."See you soon,\r\nYour friendly ".Settings::$organization." date-matching robot";
-            $headers = 'From: '.Settings::$envelopefrom.' <'.$mailfrom.'>' . "\r\n" .
+            $headers = 'From: '.Settings::$envelopefrom.' <'.Settings::$mailfrom.'>' . "\r\n" .
                         'X-Mailer: PHP/'.Settings::$name;
 
             mail($to, $subject, $message, $headers);
