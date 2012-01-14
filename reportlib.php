@@ -14,8 +14,15 @@ function getTopDates($personAID, $limit=10)
 {
     $result = mysql_query("SELECT paid FROM profile WHERE id=$personAID");
     $row = mysql_fetch_array($result);
+    
     if ($row['paid'] != 1)
 	    return false; //NO STEALING THE RESULTS, It's creepy. Yeah you, stumme.
+	    
+    $result = mysql_query("SELECT count(*) FROM response WHERE profile=$personAID");
+    $count = mysql_fetch_row($result);
+    if ($count[0] == 0)
+        return false;
+	    
     $matchlist = array();
     $results = mysql_query("SELECT id FROM `profile` WHERE `id` <> " . $personAID . " AND validated= 1;");
     while ($personB = mysql_fetch_assoc($results))
