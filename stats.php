@@ -28,26 +28,26 @@ $word[1] = 'people';
 $result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated='true'");
 $count = mysql_fetch_row($result);
 echo "Of ". $count[0] . ' people who took the survey...<br /><br />';
-$result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated='true' AND gender=2");
+$result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated='1' AND gender=2");
 $count = mysql_fetch_row($result);
 echo "There are " . $count[0] . " women.<br />";
-$result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated='true' AND gender=1");
+$result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated='1' AND gender=1");
 $count = mysql_fetch_row($result);
 echo "There are " . $count[0] . " men.<br />";
-$result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated='true' AND seeks=3");
+$result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated='1' AND seeks=3");
 $count =  mysql_fetch_row($result);
 echo("There are ". $count[0] ." bisexuals.<br>");
-$result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated='true' AND seeks=1 AND gender=1");
+$result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated='1' AND seeks=1 AND gender=1");
 $count = mysql_fetch_row($result);
 echo("There are ". $count[0] ." gays.<br>");
-$result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated='true' AND seeks=2 AND gender=2");
+$result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated='1' AND seeks=2 AND gender=2");
 $count = mysql_fetch_row($result);
 echo("There are ". $count[0] ." lesbians.<br>");
 
 $sql = "SELECT id,text,lefttext,righttext FROM question WHERE enable=1";
-$sql1 = "SELECT count(response.id) from response inner join profile on (response.profile_id=profile.id) WHERE answer > 5 AND validated='true' AND response.question_id=?";
-$sql2 = "SELECT count(response.id) from response inner join profile on (response.profile_id=profile.id) WHERE answer=5 AND validated='true' AND response.question_id=?";
-$sql3 = "SELECT count(response.id) from response inner join profile on (response.profile_id=profile.id) WHERE answer<5 AND validated='true' AND response.question_id=?";
+$sql1 = "SELECT count(response.id) from response inner join profile on (response.profile_id=profile.id) WHERE answer > 5 AND validated='1' AND response.question_id=?";
+$sql2 = "SELECT count(response.id) from response inner join profile on (response.profile_id=profile.id) WHERE answer=5 AND validated='1' AND response.question_id=?";
+$sql3 = "SELECT count(response.id) from response inner join profile on (response.profile_id=profile.id) WHERE answer<5 AND validated='1' AND response.question_id=?";
 
 echo '<br />';
 if ($stmt->prepare($sql) && $stmt1->prepare($sql1) && $stmt2->prepare($sql2) && $stmt3->prepare($sql3))
