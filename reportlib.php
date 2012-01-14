@@ -1,38 +1,36 @@
 <?php 
 function canDoIt($a, $b)
 {   
+
     $resultA = mysql_query("SELECT gender,seeks FROM profile WHERE id=$a");
     $resultB = mysql_query("SELECT gender,seeks FROM profile WHERE id=$b");
     $rowA = mysql_fetch_assoc($resultA);
     $rowB = mysql_fetch_assoc($resultB);
     
-    return (($rowA['gender'] & $rowB['seeks']) && ($rowA['seeks'] & $rowB['gender']));
+    return ($rowA['gender'] & $rowB['seeks']) && ($rowA['seeks'] & $rowB['gender']);
 }
 
-function getTopDates($personA, $limit=10)
+function getTopDates($personAID, $limit=10)
 {
-    $result = mysql_query("SELECT paid FROM profile WHERE id=$personA");
+    $result = mysql_query("SELECT paid FROM profile WHERE id=$personAID");
     $row = mysql_fetch_array($result);
     if ($row['paid'] != 1)
 	    return false; //NO STEALING THE RESULTS, It's creepy. Yeah you, stumme.
     $matchlist = array();
-    $friendlist = array();
-    $results = mysql_query("SELECT id FROM `profile` WHERE `id` <> " . $personA . " AND validated= 1;");
-    while ($personB = mysql_fetch_array($results))
+    $results = mysql_query("SELECT id FROM `profile` WHERE `id` <> " . $personAID . " AND validated= 1;");
+    while ($personB = mysql_fetch_assoc($results))
     {
-	    $score = getScore($personA, $personB['id']);
-	    if (canDoIt($personA, $personB['id']))
+	    $score = getScore($personAID, $personB['id']);
+	    //if (canDoIt($personAID, $personB['id']))
 	        $matchlist[$personB['id']] = $score;
-	    else
-	        $friendlist[$personB['id']] = $score;
     }
+    
     asort($matchlist);
-    asort($friendlist);
     
     return $matchlist;
 }
 
-function showMiniProfile($id, $score, $char)
+function showMiniProfile($id, $score)
 {
     $result = mysql_query("SELECT * FROM `profile` WHERE `id` = '$id' AND `validated` = '1';");
     if (!$result)
@@ -48,6 +46,11 @@ function showMiniProfile($id, $score, $char)
     $profileImage = "http://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?r=x&d=mm";
     $valid = $profile['validated'];
     $paid = $profile['paid'];
+    
+    if (!canDoIt($_SESSION['id'], $id))
+        $char = "&#9775;";
+    else
+        $char = "&hearts;";
     
     ?>
         <div class="mini-profile stackleft">
