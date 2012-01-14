@@ -91,11 +91,8 @@ $paid = $profile['paid'];
             <h1>Date2Knight Survey</h1>
             <form id="quiz" action="capturedata.php" method="post" >
             
-            <?php  
+            <?php quizTable(); ?>
             
-            quizTable(); 
-            
-            function contactTable(){ ?>
 		    <table class="padded content">
                 <tr>
                     <th colspan=2>Contact Info</th>
@@ -145,7 +142,7 @@ $paid = $profile['paid'];
 		        
 		                  		        
 		        
-		    </table><?php } contactTable(); ?>
+		    </table>
 			<textarea id="elm1" name="bio" rows="15" cols="80" style="width: 80%"></textarea>
 		    <input class="hugebutton" type="submit" value="Next &raquo;" />
 		    <input type="submit" id="hiddenSubmit" style="display: none;" />
