@@ -10,7 +10,7 @@ class DbAuth
 
 class Settings
 {
-    public static $name = "Date2Knight DEV";
+    public static $name = "Date2Knight";
     public static $organization = "Wartburg Computer Club";
     public static $adminpass = "missingbytes";
     public static $baseurl = "http://date2knight.com/";

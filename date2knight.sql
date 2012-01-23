@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.10
+-- version 3.3.10.4
 -- http://www.phpmyadmin.net
 --
 -- Host: mysql.owenjohnson.info
--- Generation Time: Sep 07, 2011 at 09:15 PM
+-- Generation Time: Jan 23, 2012 at 08:16 AM
 -- Server version: 5.1.53
 -- PHP Version: 5.3.5
 
@@ -31,17 +31,15 @@ CREATE TABLE IF NOT EXISTS `profile` (
   `seeks` tinyint(2) DEFAULT NULL,
   `paid` tinyint(1) DEFAULT NULL,
   `bio` text,
-  `validated` char(32) DEFAULT NULL,
+  `validated` tinyint(1) DEFAULT NULL,
+  `token` char(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `profile`
 --
 
-INSERT INTO `profile` (`id`, `firstname`, `lastname`, `box`, `phone`, `email`, `password`, `gender`, `seeks`, `paid`, `bio`, `validated`) VALUES
-(3, 'Owen', 'Johnson', NULL, NULL, 'owen.johnson@wartburg.edu', '44c4b752aa0a5a307171d004950f111f', NULL, NULL, NULL, NULL, NULL),
-(6, 'Fake', 'Guy', NULL, NULL, 'fake.guy@wartburg.edu', 'ab86a1e1ef70dff97959067b723c5c24', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -92,23 +90,6 @@ INSERT INTO `question` (`id`, `text`, `lefttext`, `righttext`, `enable`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `queue`
---
-
-CREATE TABLE IF NOT EXISTS `queue` (
-  `username` varchar(50) NOT NULL,
-  `token` char(32) NOT NULL,
-  PRIMARY KEY (`username`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `queue`
---
-
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `response`
 --
 
@@ -116,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `response` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `profile_id` int(10) unsigned DEFAULT NULL,
   `question_id` int(10) unsigned DEFAULT NULL,
-  `answer` tinyint(4) DEFAULT NULL,
+  `answer` tinyint(4) DEFAULT '5',
   PRIMARY KEY (`id`),
   KEY `profile_id` (`profile_id`),
   KEY `question_id` (`question_id`)
@@ -125,5 +106,4 @@ CREATE TABLE IF NOT EXISTS `response` (
 --
 -- Dumping data for table `response`
 --
-
 

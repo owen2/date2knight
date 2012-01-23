@@ -11,7 +11,7 @@ require_once("defaults.php");
 //DBAuth::$db = 'lovematch';
 
 
-Settings::$name = "Date2Knight (Owen's DEV Edition)";
+//Settings::$name = "Date2Knight (Owen's DEV Edition)";
 //Settings::$organization = "Wartburg Computer Club";
 //Settings::$adminpass = "missingbytes";
 //Settings::$baseurl = "http://date2knight.com/";
