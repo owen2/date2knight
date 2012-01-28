@@ -29,7 +29,9 @@ function getTopDates($personAID, $limit=10)
     {
 	    $score = getScore($personAID, $personB['id']);
 	    //if (canDoIt($personAID, $personB['id']))
+	    if ($score != -1) { // taken quiz
 	        $matchlist[$personB['id']] = $score;
+	    }
     }
     
     asort($matchlist);
@@ -79,10 +81,13 @@ function getScore($a, $b)
     $resultA = mysql_query("SELECT `answer` FROM `response` WHERE `profile_id`='$a' ORDER BY `question_id`");
     $resultB = mysql_query("SELECT `answer` FROM `response` WHERE `profile_id`='$b' ORDER BY `question_id`");
     $sum = 0;
-    while (($rowA = mysql_fetch_array($resultA)) && ($rowB = mysql_fetch_array($resultB)))
-	    $sum += pow(abs($rowA[0] - $rowB[0]),2);
+    if (mysql_num_rows($resultB) == 0) {
+	return -1;
+    }
+    while (($rowA = mysql_fetch_array($resultA)) && ($rowB = mysql_fetch_array($resultB))) {
+	$sum += pow(abs($rowA[0] - $rowB[0]),2);
+    }
     echo(mysql_error());
-    //echo(sqrt($sum));
     return sqrt($sum);
 }
 

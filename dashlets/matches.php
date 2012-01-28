@@ -7,7 +7,9 @@ elseif ($paid)
 {
     require_once("reportlib.php");
     $dates = getTopDates($_SESSION['id']);    
-    foreach ($dates as $id => $score)
-        showMiniProfile($id, $score);
+    if ($dates != '') {
+	foreach ($dates as $id => $score)
+	    showMiniProfile($id, $score);
+    }
 }
 ?><br class="reset-float">
