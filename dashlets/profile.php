@@ -1,5 +1,5 @@
 <?php
-if ($profile['gender'] == "2")
+if ($profile['gender'] == "1")
     $gender= "male";
 else
     $gender= "female";
@@ -12,8 +12,8 @@ $seeksmask = $profile['seeks'];
     <form action="update-profile.php" method="post">
         <p>My name is <?php echo($firstName." ".$lastName);?> and I am a 
             <select name="gender">  
-                <option value ="2" <?php if($gender == "male") echo('selected="true"');?>>Man</option>  
-                <option value ="1" <?php if($gender == "female") echo('selected="true"');?>>Woman<option>
+                <option value ="1" <?php if($gender == "male") echo('selected="true"');?>>Man</option>  
+                <option value ="2" <?php if($gender == "female") echo('selected="true"');?>>Woman<option>
             </select>, who is looking for a good time with 
             <select name="seeks"> 
                 <option value ="0" <?php if($seeksmask == "0") echo('selected="true"');?>>some new pals</option> 

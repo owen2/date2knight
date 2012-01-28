@@ -18,7 +18,7 @@ function getTopDates($personAID, $limit=10)
     if ($row['paid'] != 1)
 	    return false; //NO STEALING THE RESULTS, It's creepy. Yeah you, stumme.
 	    
-    $result = mysql_query("SELECT count(*) FROM response WHERE profile=$personAID");
+    $result = mysql_query("SELECT count(*) FROM response WHERE profile_id=$personAID");
     $count = mysql_fetch_row($result);
     if ($count[0] == 0)
         return false;

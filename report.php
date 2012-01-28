@@ -3,12 +3,12 @@ ini_set('display_errors', '1');
 //require_once("auth.php");
 require_once("connect.php");
 
-//$personA = $_REQUEST['id'];
-//$result = mysql_query("SELECT firstname,lastname,box FROM profile WHERE id=$personA");
-//$row = mysql_fetch_assoc($result);
-//$first = $row['firstname'];
-//$last = $row['lastname'];
-//$box = $row['box'];
+$personA = $_REQUEST['id'];
+$result = mysql_query("SELECT firstname,lastname,box FROM profile WHERE id=$personA");
+$row = mysql_fetch_assoc($result);
+$first = $row['firstname'];
+$last = $row['lastname'];
+$box = $row['box'];
 function canDoIt($a, $b)
 {   
     $resultA = mysql_query("SELECT gender,seeks FROM profile WHERE id=$a");
@@ -30,7 +30,7 @@ function getTopDates($personA, $limit=10)
     }
     $matchlist = array();
     $friendlist = array();
-    $results = mysql_query("SELECT id FROM `profile` WHERE `id` <> " . $personA . " AND validated='true'");
+    $results = mysql_query("SELECT id FROM `profile` WHERE `id` <> " . $personA . " AND validated=1");
     while ($personB = mysql_fetch_array($results))
     {
 	$personBid = $personB[0];
@@ -161,7 +161,7 @@ function decrapify($phone)
     //return $phone;
 }
 ?>
-<!--<!doctype html>
+<!doctype html>
 <head>
 <link rel="stylesheet" href="css/print.css" />
     </head>
@@ -173,4 +173,4 @@ function decrapify($phone)
     <br><br>
     <p>Scores: &hearts;&hearts;&hearts;&hearts;&hearts; and &#9775;&#9775;&#9775;&#9775;&#9775; are the best ratings possible. &#9775;&#9775;&#9775; and above are considered good matches. The lowest possible score shows no &hearts; or &#9775;.</p>
     </div>
-    </body>-->
+    </body>

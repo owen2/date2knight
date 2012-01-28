@@ -15,7 +15,7 @@ if(isset($_SESSION['key']))
         include("admin-login.php");
         die();
 }
-elseif (Settings::$adminpass==$_REQUEST['pass'])
+elseif (isset($_POST['pass']) && Settings::$adminpass==$_REQUEST['pass'])
 {
     $_SESSION['key'] = Settings::$adminpass;
     return true;
