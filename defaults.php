@@ -18,11 +18,11 @@ class Settings
     public static $envelopefrom = "Date 2 Knight";
     
     public static $validEmailDomain = "wartburg.edu";
-    public static $DEBUG_ALLOW_ANY_EMAIL = false;
+    public static $allowAnyEmail = false;
     
     public static function isAddressAllowed($address)
     {
-        return $this->DEBUG_ALLOW_ANY_EMAIL or strpos($address, Settings::$validEmailDomain);
+        return $this->allowAnyEmail or strpos($address, Settings::$validEmailDomain);
     }
     
     public static $pollMonthOpen = 2;
