@@ -28,7 +28,7 @@ if (isset($_REQUEST['isNewUser']) and isset($_REQUEST['email']) and isset($_REQU
 	// restrict domains...
 	$frags = explode('@',$_REQUEST['email']);
 	$domain = $frags[1];
-	if (Settings::$validEmailDomain !=  $domain) {
+	if ((Settings::$restrictDomain) && Settings::$validEmailDomain !=  $domain) {
 	    header("Location: .?error=Enter valid domain: " . Settings::$validEmailDomain);
 	}
         $email = $_REQUEST['email'];
