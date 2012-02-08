@@ -14,11 +14,14 @@ if (!isset($_SESSION))
 if (isset($_REQUEST['isNewUser']) and isset($_REQUEST['email']) and isset($_REQUEST['password']) and isset($_REQUEST['password-check']) and ($_REQUEST['password'] == $_REQUEST['password-check']))
 {
     //Check to see if there is a * valid * user already
-    $q = "SELECT * FROM `profile WHERE `email` = '".$_REQUEST['email']."'";
-    $q = "SELECT * FROM `profile WHERE `email` = '".$_REQUEST['email']."' and `validated` <> null";
+
+    $q = "SELECT * FROM `profile` WHERE `email` = '".$_REQUEST['email']."' and `validated` =1";
     $result = mysql_query($q);
-    if(!$result)
-    {
+    if (mysql_num_rows($result) > 0) {
+	// valid user alread exists
+	header("Location: index.php?error=User already exists");
+	die();
+    }else{ // We can create as many unvalidated users as we want for a particular email address
         $emailFrags = explode('.',$_REQUEST['email']);
         $first = ucfirst($emailFrags[0]);
         $last = explode("@",ucfirst($emailFrags[1]));
@@ -29,7 +32,8 @@ if (isset($_REQUEST['isNewUser']) and isset($_REQUEST['email']) and isset($_REQU
 	$frags = explode('@',$_REQUEST['email']);
 	$domain = $frags[1];
 	if ((Settings::$restrictDomain) && Settings::$validEmailDomain !=  $domain) {
-	    header("Location: .?error=Enter valid domain: " . Settings::$validEmailDomain);
+	    header("Location: index.php?error=Enter valid domain: " . Settings::$validEmailDomain);
+	    die('Domain Error');
 	}
         $email = $_REQUEST['email'];
         $hash = md5($_REQUEST['password']);
@@ -50,8 +54,6 @@ if (isset($_REQUEST['isNewUser']) and isset($_REQUEST['email']) and isset($_REQU
 
             mail($to, $subject, $message, $headers);
         }
-        else
-            die(mysql_error());
     }
     
 }
@@ -85,7 +87,7 @@ if (isset($_REQUEST['email']) and isset($_REQUEST['password']))
 //If not authenticated, bail!
 if (!isset($_SESSION['id']))
 {
-    header('location: index.php');
+    header('location: index.php?error=Authentication Error!');
 }
 
 $q = "SELECT * FROM `profile` WHERE `id` = ".$_SESSION['id'];
