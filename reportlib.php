@@ -39,7 +39,34 @@ function getTopDates($personAID, $limit=10)
     return $matchlist;
 }
 
-function showMiniProfile($id, $score)
+function printReport($id) 
+{
+    $result = mysql_query("SELECT * FROM `profile` WHERE `id` = '$id' AND `validated` = '1';");
+    if (!$result)
+        die(mysql_error());
+    $profile = mysql_fetch_array($result);
+    $firstName = $profile['firstname'];
+    $lastName = $profile['lastname'];
+    $email = $profile['email'];
+    $box = $profile['box'];
+    $bio = $profile['bio'];
+    $phone = $profile['phone'];
+    $dates = getTopDates($id);
+    echo '<h1>';
+    echo $firstName . ' '  . $lastName . "<br />Mailbox " . $box;
+    echo '</h1>';
+    if ($dates != '') {
+	foreach ($dates as $date_id => $score) {
+	    showMiniProfile($date_id,$id,$score);
+	    echo '<br class="reset-float" />';
+	}
+    }    
+    echo '<br><br>    <p>Scores: &hearts;&hearts;&hearts;&hearts;&hearts; and &#9775;&#9775;&#9775;&#9775;&#9775; are the best ratings possible. &#9775;&#9775;&#9775; and above are considered good matches. The lowest possible score shows no &hearts; or &#9775;.</p>
+';
+    
+    
+}
+function showMiniProfile($id,$source_id, $score)
 {
     $result = mysql_query("SELECT * FROM `profile` WHERE `id` = '$id' AND `validated` = '1';");
     if (!$result)
@@ -56,7 +83,7 @@ function showMiniProfile($id, $score)
     $valid = $profile['validated'];
     $paid = $profile['paid'];
     
-    if (!canDoIt($_SESSION['id'], $id))
+    if (!canDoIt($source_id, $id))
         $char = "&#9775;";
     else
         $char = "&hearts;";
