@@ -77,7 +77,7 @@ if (isset($_REQUEST['email']) and isset($_REQUEST['password']))
     }
     else
     {
-        header("location: /");
+        header("location: index.php");
     }
 
 }
