@@ -17,8 +17,8 @@ $seeksmask = $profile['seeks'];
             </select>, who is looking for a good time with 
             <select name="seeks"> 
                 <option value ="0" <?php if($seeksmask == "0") echo('selected="true"');?>>some new pals</option> 
-                <option value ="2" <?php if($seeksmask == "2") echo('selected="true"');?>>a Man</option>  
-                <option value ="1" <?php if($seeksmask == "1") echo('selected="true"');?>>a Woman</option>  
+                <option value ="1" <?php if($seeksmask == "1") echo('selected="true"');?>>a Man</option>  
+                <option value ="2" <?php if($seeksmask == "2") echo('selected="true"');?>>a Woman</option>  
                 <option value ="3" <?php if($seeksmask == "3") echo('selected="true"');?>>a Man or a Woman</option>  
             </select>.
         </p>

@@ -12,7 +12,7 @@ if (!checkSimplePasskey("missingbytes", $_REQUEST['pass']))
 require_once("connect.php");
 
 $update = "UPDATE profile SET `paid` = 1 WHERE id =" .$_REQUEST['id'];
-$r = mysql_query("SELECT * FROM `responses` WHERE `id` = ". $_REQUEST['id']);
+$r = mysql_query("SELECT * FROM `profile` WHERE `id` = ". $_REQUEST['id']);
 $person = mysql_fetch_array($r);
     $first = $person['firstname'];
 $last = $person['lastname'];
@@ -51,7 +51,7 @@ if(mysql_query($update))
 {
     $headers = "From: mail-robot@wartburg.edu";
     mail($email,"Date 2 Knight",$body,$headers);
-    header("location: kiosk.php");    
+    header("location: admin.php");    
 }
     ?><h1>SOMETHING WENT WRONG!</h1><p>There was an error marking as paid.</p><?php
     mysql_error();
