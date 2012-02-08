@@ -23,6 +23,14 @@ if (isset($_REQUEST['isNewUser']) and isset($_REQUEST['email']) and isset($_REQU
         $first = ucfirst($emailFrags[0]);
         $last = explode("@",ucfirst($emailFrags[1]));
         $last = $last[0];
+	
+	// If we are restricting domains
+	// restrict domains...
+	$frags = explode('@',$_REQUEST['email']);
+	$domain = $frags[1];
+	if (Settings::$validEmailDomain !=  $domain) {
+	    header("Location: .?error=Enter valid domain: " . Settings::$validEmailDomain);
+	}
         $email = $_REQUEST['email'];
         $hash = md5($_REQUEST['password']);
         $token = md5(microtime() . $_POST['email']);
@@ -77,7 +85,7 @@ if (isset($_REQUEST['email']) and isset($_REQUEST['password']))
 //If not authenticated, bail!
 if (!isset($_SESSION['id']))
 {
-    header('location: /');
+    header('location: index.php');
 }
 
 $q = "SELECT * FROM `profile` WHERE `id` = ".$_SESSION['id'];
