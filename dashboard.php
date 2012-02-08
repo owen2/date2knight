@@ -69,7 +69,7 @@ if (isset($_REQUEST['email']) and isset($_REQUEST['password']))
     }
     else
     {
-        header("location: user-login.php");
+        header("Location: index.php?error=Username not found");
     }
     if ($email == $profile['email'] and md5($_REQUEST['password']) == $profile['password'])
     {
@@ -77,7 +77,7 @@ if (isset($_REQUEST['email']) and isset($_REQUEST['password']))
     }
     else
     {
-        header("location: index.php");
+        header("Location: index.php?error=Incorrect username or password");
     }
 
 }
@@ -113,6 +113,7 @@ $paid = $profile['paid'];
         <a href="http://gravatar.com"><img src="<?php echo($profileImage);?>" class="stackright" alt="Set your picture!"/></a>
                 <h1><?php echo($firstName . " " . $lastName); ?></h1>
                 <?php echo($bio); ?>
+		<span class="stackright"><a href="killsession.php">logout</a></span>
             <br style="clear:both">
             <hr>
         <?php 
