@@ -26,14 +26,14 @@ Dear $name,
 
 Thank you for supporting the Wartburg Computer Club!
 
-We will be sending your results to the campus mailbox you provided ($box). Results will be available once everyone has had a chance to take the survey. 
+You may now check your current matches by logging in to date2knight.com.
 
 The more people that take the survey the better your results will be, so be sure to tell your friends about this event.
 
 We really hope you find a Valentine or a friend. 
 
 Sincerely,
-Date 2 Knight Team 2011
+Date 2 Knight Team 2012
 Owen Johnson
 Joshua Osbeck
 Jacob Hinrichsen
@@ -42,7 +42,7 @@ Nathan Stumme
 Heath Rost
 Lacey Stonehocker
 Dr. John Zelle
-Terry Letsche
+Dr. Terry Letsche
 
 You received this email because you took the Date 2 Knight survey and you purchased your results. (Or someone paid to send them to you!)
 ";
