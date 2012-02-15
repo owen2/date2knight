@@ -35,12 +35,14 @@ We really hope you find a Valentine or a friend.
 Sincerely,
 Date 2 Knight Team 2012
 Owen Johnson
-Joshua Osbeck
-Jacob Hinrichsen
 Andrew Reisner
-Nathan Stumme
-Heath Rost
-Lacey Stonehocker
+Brett Peterson
+Matthew Dickman
+Paul Masterson
+Adam Kucera
+Jon Juett
+Aaron Schendel
+Chuck Norris
 Dr. John Zelle
 Dr. Terry Letsche
 

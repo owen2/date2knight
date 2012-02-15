@@ -35,8 +35,16 @@ function getTopDates($personAID, $limit=10)
     }
     
     asort($matchlist);
-    
-    return $matchlist;
+    $retlist = array();
+    $count = 0;
+    foreach ($matchlist as $key => $value) {
+    	if ($count == $limit){
+	    break;
+	}	    
+        $retlist[$key] = $value;
+	$count = $count + 1;
+    }   
+    return $retlist;
 }
 
 function printReport($id) 
