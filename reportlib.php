@@ -41,7 +41,8 @@ function getTopDates($personAID, $limit=10)
     // Accumulate $limit/2 lovematches and store rest sorted in $tail
     $count = 0;
     foreach ($matchlist as $key => $value) {
-	if ($count <= ($limit/2) && canDoIt($personAID,$key)) {
+	if ($count < ($limit/2) && canDoIt($personAID,$key)) {
+	    $count = $count + 1;	
 	    $retlist[$key] = $value;
 	}else {
 	    $tail[$key] = $value;
