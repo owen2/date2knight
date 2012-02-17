@@ -38,7 +38,7 @@ function getTopDates($personAID, $limit=10)
     $retlist = array();
     $count = 0;
     foreach ($matchlist as $key => $value) {
-    	if ($count == $limit){
+    	if ($count == ($limit+1)){
 	    break;
 	}	    
         $retlist[$key] = $value;
