@@ -36,14 +36,29 @@ function getTopDates($personAID, $limit=10)
     
     asort($matchlist);
     $retlist = array();
+    $tail = array();
+
+    // Accumulate $limit/2 lovematches and store rest sorted in $tail
     $count = 0;
     foreach ($matchlist as $key => $value) {
-    	if ($count == ($limit+1)){
+	if ($count <= ($limit/2) && canDoIt($personAID,$key)) {
+	    $retlist[$key] = $value;
+	}else {
+	    $tail[$key] = $value;
+	}
+    }
+    $lovers = count($retlist); // number of love matches
+
+    // fill up rest of $retlist up to $limit with friend mathces
+    $count = 0;
+    foreach ($tail as $key => $value) {
+    	if (($count+$lovers)  == ($limit+1)){
 	    break;
 	}	    
         $retlist[$key] = $value;
 	$count = $count + 1;
     }   
+
     return $retlist;
 }
 
