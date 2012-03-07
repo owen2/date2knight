@@ -25,7 +25,7 @@ $stmt3 = $db->stmt_init();
 $word[0] = 'person';
 $word[1] = 'people';
 
-$result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated='true'");
+$result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated=1");
 $count = mysql_fetch_row($result);
 echo "Of ". $count[0] . ' people who took the survey...<br /><br />';
 $result = mysql_query("SELECT COUNT(*) FROM profile WHERE validated='1' AND gender=2");

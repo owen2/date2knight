@@ -18,7 +18,7 @@ function getTopDates($personAID, $limit=10)
     if ($row['paid'] != 1)
 	    return false; //NO STEALING THE RESULTS, It's creepy. Yeah you, stumme.
 	    
-    $result = mysql_query("SELECT count(*) FROM response WHERE profile=$personAID");
+    $result = mysql_query("SELECT count(*) FROM response WHERE profile_id=$personAID");
     $count = mysql_fetch_row($result);
     if ($count[0] == 0)
         return false;
@@ -29,15 +29,68 @@ function getTopDates($personAID, $limit=10)
     {
 	    $score = getScore($personAID, $personB['id']);
 	    //if (canDoIt($personAID, $personB['id']))
+	    if ($score != -1) { // taken quiz
 	        $matchlist[$personB['id']] = $score;
+	    }
     }
     
     asort($matchlist);
-    
-    return $matchlist;
+    $retlist = array();
+    $tail = array();
+
+    // Accumulate $limit/2 lovematches and store rest sorted in $tail
+    $count = 0;
+    foreach ($matchlist as $key => $value) {
+	if ($count < ($limit/2) && canDoIt($personAID,$key)) {
+	    $count = $count + 1;	
+	    $retlist[$key] = $value;
+	}else {
+	    $tail[$key] = $value;
+	}
+    }
+    $lovers = count($retlist); // number of love matches
+
+    // fill up rest of $retlist up to $limit with friend mathces
+    $count = 0;
+    foreach ($tail as $key => $value) {
+    	if (($count+$lovers)  == ($limit+1)){
+	    break;
+	}	    
+        $retlist[$key] = $value;
+	$count = $count + 1;
+    }   
+
+    return $retlist;
 }
 
-function showMiniProfile($id, $score)
+function printReport($id) 
+{
+    $result = mysql_query("SELECT * FROM `profile` WHERE `id` = '$id' AND `validated` = '1';");
+    if (!$result)
+        die(mysql_error());
+    $profile = mysql_fetch_array($result);
+    $firstName = $profile['firstname'];
+    $lastName = $profile['lastname'];
+    $email = $profile['email'];
+    $box = $profile['box'];
+    $bio = $profile['bio'];
+    $phone = $profile['phone'];
+    $dates = getTopDates($id);
+    echo '<h1>';
+    echo $firstName . ' '  . $lastName . "<br />Mailbox " . $box;
+    echo '</h1>';
+    if ($dates != '') {
+	foreach ($dates as $date_id => $score) {
+	    showMiniProfile($date_id,$id,$score);
+	    echo '<br class="reset-float" />';
+	}
+    }    
+    echo '<br><br>    <p>Scores: &hearts;&hearts;&hearts;&hearts;&hearts; and &#9775;&#9775;&#9775;&#9775;&#9775; are the best ratings possible. &#9775;&#9775;&#9775; and above are considered good matches. The lowest possible score shows no &hearts; or &#9775;.</p>
+';
+    
+    
+}
+function showMiniProfile($id,$source_id, $score)
 {
     $result = mysql_query("SELECT * FROM `profile` WHERE `id` = '$id' AND `validated` = '1';");
     if (!$result)
@@ -54,7 +107,7 @@ function showMiniProfile($id, $score)
     $valid = $profile['validated'];
     $paid = $profile['paid'];
     
-    if (!canDoIt($_SESSION['id'], $id))
+    if (!canDoIt($source_id, $id))
         $char = "&#9775;";
     else
         $char = "&hearts;";
@@ -79,10 +132,13 @@ function getScore($a, $b)
     $resultA = mysql_query("SELECT `answer` FROM `response` WHERE `profile_id`='$a' ORDER BY `question_id`");
     $resultB = mysql_query("SELECT `answer` FROM `response` WHERE `profile_id`='$b' ORDER BY `question_id`");
     $sum = 0;
-    while (($rowA = mysql_fetch_array($resultA)) && ($rowB = mysql_fetch_array($resultB)))
-	    $sum += pow(abs($rowA[0] - $rowB[0]),2);
+    if (mysql_num_rows($resultB) == 0) {
+	return -1;
+    }
+    while (($rowA = mysql_fetch_array($resultA)) && ($rowB = mysql_fetch_array($resultB))) {
+	$sum += pow(abs($rowA[0] - $rowB[0]),2);
+    }
     echo(mysql_error());
-    //echo(sqrt($sum));
     return sqrt($sum);
 }
 

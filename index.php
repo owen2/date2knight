@@ -1,4 +1,9 @@
-<?php require_once("config.php"); ?>
+<?php require_once("config.php"); 
+session_start();
+if (isset($_SESSION['id'])) {
+    header('Location: dashboard.php');
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,6 +19,15 @@
             <br style="clear:both">
 
             <div class="padded content">
+	      <div id="error">
+		<?php
+		   echo '<font color="red">';
+		   if (isset($_GET['error'])) {
+		       echo $_GET['error'];
+		   }
+		   echo '</font>';
+		?>
+	      </div>
                 <h1><?php echo(Settings::$name); ?></h1>
                 <p>A service from the <?php echo(Settings::$organization); ?> to help you find a date (or a friend).</p>
                 <h2>How it works:</h2>

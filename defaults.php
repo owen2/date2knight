@@ -17,13 +17,8 @@ class Settings
     public static $mailfrom = "mail-bot@date2knight.com";
     public static $envelopefrom = "Date 2 Knight";
     
+    public static $restrictDomain = true;
     public static $validEmailDomain = "wartburg.edu";
-    public static $DEBUG_ALLOW_ANY_EMAIL = false;
-    
-    public static function isAddressAllowed($address)
-    {
-        return $this->DEBUG_ALLOW_ANY_EMAIL or strpos($address, Settings::$validEmailDomain);
-    }
     
     public static $pollMonthOpen = 2;
     public static $pollMonthClose = 2;
