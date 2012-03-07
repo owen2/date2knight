@@ -14,19 +14,31 @@ if (!isset($_SESSION))
 if (isset($_REQUEST['isNewUser']) and isset($_REQUEST['email']) and isset($_REQUEST['password']) and isset($_REQUEST['password-check']) and ($_REQUEST['password'] == $_REQUEST['password-check']))
 {
     //Check to see if there is a * valid * user already
-    $q = "SELECT * FROM `profile WHERE `email` = '".$_REQUEST['email']."'";
-    $q = "SELECT * FROM `profile WHERE `email` = '".$_REQUEST['email']."' and `validated` <> null";
+
+    $q = "SELECT * FROM `profile` WHERE `email` = '".$_REQUEST['email']."' and `validated` =1";
     $result = mysql_query($q);
-    if(!$result)
-    {
+    if (mysql_num_rows($result) > 0) {
+	// valid user alread exists
+	header("Location: index.php?error=User already exists");
+	die();
+    }else{ // We can create as many unvalidated users as we want for a particular email address
         $emailFrags = explode('.',$_REQUEST['email']);
         $first = ucfirst($emailFrags[0]);
         $last = explode("@",ucfirst($emailFrags[1]));
         $last = $last[0];
+	
+	// If we are restricting domains
+	// restrict domains...
+	$frags = explode('@',$_REQUEST['email']);
+	$domain = $frags[1];
+	if ((Settings::$restrictDomain) && Settings::$validEmailDomain !=  $domain) {
+	    header("Location: index.php?error=Enter valid domain: " . Settings::$validEmailDomain);
+	    die('Domain Error');
+	}
         $email = $_REQUEST['email'];
         $hash = md5($_REQUEST['password']);
         $token = md5(microtime() . $_POST['email']);
-        $q = "INSERT INTO `lovematch`.`profile` (`id`, `firstname`, `lastname`, `box`, `phone`, `email`, `password`, `gender`, `seeks`, `paid`, `bio`, `validated`,`token`) VALUES (NULL, '$first', '$last', NULL, NULL, '$email', '$hash', NULL, NULL, NULL, NULL, NULL,'$token');";
+        $q = "INSERT INTO `profile` (`id`, `firstname`, `lastname`, `box`, `phone`, `email`, `password`, `gender`, `seeks`, `paid`, `bio`, `validated`,`token`) VALUES (NULL, '$first', '$last', NULL, NULL, '$email', '$hash', NULL, NULL, NULL, NULL, NULL,'$token');";
         $result = mysql_query($q);
         if ($result)
         {
@@ -42,8 +54,6 @@ if (isset($_REQUEST['isNewUser']) and isset($_REQUEST['email']) and isset($_REQU
 
             mail($to, $subject, $message, $headers);
         }
-        else
-            die(mysql_error());
     }
     
 }
@@ -61,7 +71,7 @@ if (isset($_REQUEST['email']) and isset($_REQUEST['password']))
     }
     else
     {
-        header("location: user-login.php");
+        header("Location: index.php?error=Username not found");
     }
     if ($email == $profile['email'] and md5($_REQUEST['password']) == $profile['password'])
     {
@@ -69,7 +79,7 @@ if (isset($_REQUEST['email']) and isset($_REQUEST['password']))
     }
     else
     {
-        header("location: /");
+        header("Location: index.php?error=Incorrect username or password");
     }
 
 }
@@ -77,7 +87,7 @@ if (isset($_REQUEST['email']) and isset($_REQUEST['password']))
 //If not authenticated, bail!
 if (!isset($_SESSION['id']))
 {
-    header('location: /');
+    header('location: index.php?error=Authentication Error!');
 }
 
 $q = "SELECT * FROM `profile` WHERE `id` = ".$_SESSION['id'];
@@ -105,6 +115,7 @@ $paid = $profile['paid'];
         <a href="http://gravatar.com"><img src="<?php echo($profileImage);?>" class="stackright" alt="Set your picture!"/></a>
                 <h1><?php echo($firstName . " " . $lastName); ?></h1>
                 <?php echo($bio); ?>
+		<span class="stackright"><a href="killsession.php">logout</a></span>
             <br style="clear:both">
             <hr>
         <?php 
