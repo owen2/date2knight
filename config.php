@@ -5,25 +5,25 @@ require_once("defaults.php");
 ///  Use this file to edit many aspects of the application. If nothing is specified, the value will be pulled from defaults.php ///
 ///  // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // ///
 
-//DBAuth::$host = 'mysql.owenjohnson.info';
-//DBAuth::$user = 'lovematch';
-//DBAuth::$password = 'lovematch';
-//DBAuth::$db = 'lovematch';
+DBAuth::$host = 'mysql.owenjohnson.info';
+DBAuth::$user = 'viorg';
+DBAuth::$password = '3ast3r3gg!';
+DBAuth::$db = 'viorgcandidata';
 
 
-//Settings::$name = "Date2Knight (Owen's DEV Edition)";
-//Settings::$organization = "Wartburg Computer Club";
+Settings::$name = "Vote Informed";
+Settings::$organization = "Owen Johnson";
 //Settings::$adminpass = "missingbytes";
-//Settings::$baseurl = "http://date2knight.com/";
-//Settings::$mailfrom = "mail-bot@date2knight.com";
-//Settings::$envelopefrom = "Date 2 Knight";
+Settings::$baseurl = "http://voteinformed.org";
+Settings::$mailfrom = "mail-bot@voteinformed.org";
+Settings::$envelopefrom = "VoteInformed.org";
     
-//Settings::$validEmailDomain = "wartburg.edu";
-//Settings::$DEBUG_ALLOW_ANY_EMAIL = false;
+Settings::$validEmailDomain = "somedomain.mail";
+Settings::$restrictDomain = false;
     
 Settings::$pollMonthOpen = 1;
 Settings::$pollMonthClose = 12;
-Settings::$pollDayOpen = 1; // first day inclusive
+Settings::$pollDayOpen = 12; // first day inclusive
 Settings::$pollDayClose = 31; // last day inclusive
     
 ?>

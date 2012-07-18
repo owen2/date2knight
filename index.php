@@ -29,12 +29,12 @@ if (isset($_SESSION['id'])) {
 		?>
 	      </div>
                 <h1><?php echo(Settings::$name); ?></h1>
-                <p>A service from the <?php echo(Settings::$organization); ?> to help you find a date (or a friend).</p>
+                <p>A website by <?php echo(Settings::$organization); ?> to help you find a candidate who agrees with you.</p>
                 <h2>How it works:</h2>
                 <ol>
-                    <li>You answer some questions about yourself.</li>
-                    <li>We add you to our magic database so that others can get matched to you.</li>
-                    <li>If you make a small donation to the <?php echo(Settings::$organization); ?>, our monkeys and robots make a list of people you would get along with on a date or as buddies.</li>
+                    <li>We ask the candidates a few carefully crafted questions.</li>
+                    <li>We ask you the same questions.</li>
+                    <li>We calculate which candidates you are most aligned with.</li>
                 </ol>
                 <h2>Create an account:</h2>
                 <form id="form" name="login" action="dashboard.php" method="post">
@@ -58,6 +58,8 @@ if (isset($_SESSION['id'])) {
                         <input type="hidden" name="isNewUser" value="true" />
                     </table>
                 </form>
+                <h2>Privacy</h2>
+                <p>Your responses will be used to show you how well you are aligned to each candidate, and an we will not expose your personal data. We may however, share an anonymous agregation of all responses. We will never share your email address.</p>
             </div>
         </div>
         <div class="fixed-corner">Powered by <a href="http://gitub.com/WartburgComputerClub/date2knight">Date 2 Knight</a> :: <a href="http://wartburg.edu">Wartburg College</a> <a href="http://mcsp.wartburg.edu">Computer Club</a></div>
