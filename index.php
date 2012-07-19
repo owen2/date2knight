@@ -10,14 +10,13 @@ if (isset($_SESSION['id'])) {
         <link rel="stylesheet" href="css/style.css" media="screen">
     </head>
     <body>
-        <div class="bodywrap">
-            <div class="stackright login-container">
+        <div id="splash-page" class="bodywrap">
+            <div class="stackright padded login-container">
                 <form action="dashboard.php" method="post">
-                    login: <input name="email" type="email" required="required" placeholder="first.last@<?php echo(Settings::$validEmailDomain); ?>" /> <input name="password" type="password" required="required" placeholder="password"/> <input type="submit" value="go" />
+                    Login: <input name="email" type="email" required="required" placeholder="Email Address" /> <input type="text" name="comment" style="display:none"/> <!--honeypot... don't use --><input type="submit" value="Try It" />
                 </form>
             </div>
-            <br style="clear:both">
-
+            
             <div class="padded content">
 	      <div id="error">
 		<?php
@@ -28,6 +27,7 @@ if (isset($_SESSION['id'])) {
 		   echo '</font>';
 		?>
 	      </div>
+	      <div>
                 <h1><?php echo(Settings::$name); ?></h1>
                 <p>A website by <?php echo(Settings::$organization); ?> to help you find a candidate who agrees with you.</p>
                 <h2>How it works:</h2>
@@ -35,7 +35,9 @@ if (isset($_SESSION['id'])) {
                     <li>We ask the candidates a few carefully crafted questions.</li>
                     <li>We ask you the same questions.</li>
                     <li>We calculate which candidates you are most aligned with.</li>
-                </ol>
+                </ol></div>
+                
+                <!--
                 <h2>Create an account:</h2>
                 <form id="form" name="login" action="dashboard.php" method="post">
                     <table class="register-container">
@@ -57,11 +59,10 @@ if (isset($_SESSION['id'])) {
                         </tr>
                         <input type="hidden" name="isNewUser" value="true" />
                     </table>
-                </form>
+                </form>-->
                 <h2>Privacy</h2>
-                <p>Your responses will be used to show you how well you are aligned to each candidate, and an we will not expose your personal data. We may however, share an anonymous agregation of all responses. We will never share your email address.</p>
+                <p>Your responses will be used to show you how well you are aligned to each candidate, and we will not expose your personal data. We may share an anonymous agregation of all responses. We will never share or store your email address.</p>
             </div>
         </div>
-        <div class="fixed-corner">Powered by <a href="http://gitub.com/WartburgComputerClub/date2knight">Date 2 Knight</a> :: <a href="http://wartburg.edu">Wartburg College</a> <a href="http://mcsp.wartburg.edu">Computer Club</a></div>
-    <body>
+    </body>
 </html>

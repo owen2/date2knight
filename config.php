@@ -8,7 +8,7 @@ require_once("defaults.php");
 DBAuth::$host = 'mysql.owenjohnson.info';
 DBAuth::$user = 'viorg';
 DBAuth::$password = '3ast3r3gg!';
-DBAuth::$db = 'viorgcandidata';
+DBAuth::$db = 'candidata';
 
 
 Settings::$name = "Vote Informed";
